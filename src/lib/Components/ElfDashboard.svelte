@@ -3,21 +3,47 @@
 		let elvesPromise = await fetch('https://advent.sveltesociety.dev/data/2023/day-one.json');
 		return await elvesPromise.json();
 	}
-	//yea
 </script>
 
 {#await fetchElves()}
 	loading...
 {:then elves}
-	<ol
-		class="h-[300px] overflow-y-scroll border border-dashed rounded-xl p-4 [&_div:last-child]:border-none text-xl"
-	>
-		{#each elves as e}
-			<div class="flex justify-between border-b py-1">
-				<span>{e.name}</span>
+	<div class="h-[600px] overflow-y-scroll rounded-xl border hide-scrollbar">
+		<table class="table table-lg table-pin-rows">
+			<thead class="text-xl text-base-content">
+				<tr class="bg-base-200">
+					<th>Name</th>
+					<th class="text-right">Tally</th>
+				</tr>
+			</thead>
+			<tbody>
+				{#each elves as e}
+					<tr class="hover:bg-base-200 transition-all hover:font-bold">
+						<td>{e.name}</td>
 
-				<span class="tabular-nums">{e.tally}</span>
-			</div>
-		{/each}
-	</ol>
+						<td class="tabular-nums text-right">{e.tally}</td>
+					</tr>
+				{/each}
+			</tbody>
+		</table>
+	</div>
 {/await}
+
+<style>
+	.hide-scrollbar {
+		scrollbar-width: thin;
+		scrollbar-color: transparent transparent;
+
+		&::-webkit-scrollbar {
+			width: 0px;
+		}
+
+		&::-webkit-scrollbar-track {
+			background: transparent;
+		}
+
+		&::-webkit-scrollbar-thumb {
+			background-color: transparent;
+		}
+	}
+</style>

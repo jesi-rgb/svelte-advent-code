@@ -4,4 +4,6 @@
 </script>
 
 <div class="text-4xl font-bold text-secondary">ELVES</div>
-<ElfDashboard />
+<section class="my-10">
+	<ElfDashboard />
+</section>
