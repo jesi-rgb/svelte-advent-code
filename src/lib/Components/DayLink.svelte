@@ -4,7 +4,7 @@
 </script>
 
 <a href={link}>
-	<li class="underline hover:text-primary transition-colors text-4xl">
+	<li class="underline hover:text-primary transition-colors text-2xl">
 		{title}
 	</li>
 </a>

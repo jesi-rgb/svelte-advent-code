@@ -19,7 +19,7 @@
 </p>
 
 <section class="my-10">
-	<ol class="list-decimal space-y-2 flex flex-col">
+	<ol class="list-decimal list-inside space-y-2 flex flex-col">
 		<DayLink link="/day1" title="Tally Dashboard" />
 		<DayLink link="/day2" title="Cookie Counter" />
 	</ol>
