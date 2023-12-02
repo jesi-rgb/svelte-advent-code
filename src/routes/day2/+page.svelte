@@ -84,9 +84,9 @@
 </script>
 
 <BackButton />
-<Heading>Cookie Counter</Heading>
+<Heading><div class="md:text-center">Cookie Counter</div></Heading>
 
-<div class="w-2/3">
+<div class="md:w-2/3 md:text-center md:mx-auto">
 	<p>
 		Santa wants to eat cookies and know how many. Little does he know that <em>that</em> is impossible
 		to know!
@@ -97,7 +97,7 @@
 	</p>
 </div>
 
-<main class="w-1/2 mx-auto mt-10">
+<main class="md:w-1/2 mx-auto mt-10">
 	<div class="flex justify-between w-full items-center">
 		<button class="btn btn-outline text-4xl font-bold" on:click={() => (cookies -= 1)}>–</button>
 		<div class="tabular-nums font-bold text-2xl">{cookies}</div>
