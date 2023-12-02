@@ -28,6 +28,6 @@
 <footer>
 	Made by <a href="https:jesirgb.com" class="underline hover:text-primary transition-colors"
 		>Jesús Rascón</a
-	>. Typeset in
-	<a href="https://djr.com/fern" class="underline hover:text-primary transition-colors">Fern</a>
+	>. <br /> Typeset in
+	<a href="https://djr.com/fern" class="underline hover:text-primary transition-colors">Fern</a>.
 </footer>
