@@ -2,6 +2,7 @@
 	import { scale, fade } from 'svelte/transition';
 	import Heading from '$lib/Components/Heading.svelte';
 	import { backIn, backOut, elasticOut } from 'svelte/easing';
+	import BackButton from '$lib/Components/BackButton.svelte';
 
 	let cookies = 0;
 
@@ -82,14 +83,19 @@
 	}
 </script>
 
+<BackButton />
 <Heading>Cookie Counter</Heading>
 
-<p>
-	Santa wants to eat cookies and know how many. Little does he know that <em>that</em> is impossible
-	to know!
-</p>
+<div class="w-2/3">
+	<p>
+		Santa wants to eat cookies and know how many. Little does he know that <em>that</em> is impossible
+		to know!
+	</p>
 
-<p class="opacity-50">Note: you can use the arrows → ← in your keyboard to play this little game</p>
+	<p class="opacity-50">
+		Note: you can use the arrows → ← in your keyboard to play this little game
+	</p>
+</div>
 
 <main class="w-1/2 mx-auto mt-10">
 	<div class="flex justify-between w-full items-center">
