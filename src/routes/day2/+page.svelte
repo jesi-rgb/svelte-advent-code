@@ -100,7 +100,7 @@
 <main class="w-1/2 mx-auto mt-10">
 	<div class="flex justify-between w-full items-center">
 		<button class="btn btn-outline text-4xl font-bold" on:click={() => (cookies -= 1)}>–</button>
-		<div>{cookies}</div>
+		<div class="tabular-nums font-bold text-2xl">{cookies}</div>
 		<button class="btn btn-outline text-4xl font-bold" on:click={() => (cookies += 1)}>+</button>
 	</div>
 	{#key message}
