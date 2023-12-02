@@ -1,7 +1,15 @@
-<script>
+<script lang="ts">
+	type Elf = {
+		name: string;
+		tally: number;
+	};
 	async function fetchElves() {
 		let elvesPromise = await fetch('https://advent.sveltesociety.dev/data/2023/day-one.json');
-		return await elvesPromise.json();
+		let elves = await elvesPromise.json();
+
+		elves.sort((b: Elf, a: Elf) => a.tally - b.tally);
+
+		return elves;
 	}
 </script>
 
@@ -18,7 +26,7 @@
 			</thead>
 			<tbody>
 				{#each elves as e}
-					<tr class="hover:bg-base-200 transition-all hover:font-bold">
+					<tr class="hover:bg-primary hover:text-primary-content transition-all hover:font-bold">
 						<td>{e.name}</td>
 
 						<td class="tabular-nums text-right">{e.tally}</td>

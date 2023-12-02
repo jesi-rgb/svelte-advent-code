@@ -12,7 +12,7 @@ const config = {
 
   plugins: [require('daisyui')],
   daisyui: {
-    themes: ['dracula']
+    themes: ['dim']
   }
 };
 
