@@ -1,13 +1,22 @@
 <script>
-	//yea
-
 	import DayLink from '$lib/Components/DayLink.svelte';
 	import Heading from '$lib/Components/Heading.svelte';
 </script>
 
-<Heading>Advent of Code for Svelte 2023</Heading>
+<div class="text-center mb-1 text-secondary text-4xl">
+	<div style="font-family: Fern Ornaments;">W</div>
+	<div style="font-family: Fern Ornaments;">ITRP</div>
+	<div style="font-family: Fern Ornaments;">IGQTREFP</div>
+</div>
+<Heading>
+	<div class="text-center">Advent of Code 2023</div></Heading
+>
 
-<p class="text-2xl">Compilation of the different days of advent of code for this year's edition.</p>
+<p class="text-2xl">
+	Compilation of the <a href="https://advent.sveltesociety.dev/#challenges" class="underline"
+		>different exercises</a
+	> for this year's edition.
+</p>
 
 <section class="my-10">
 	<ol class="list-decimal space-y-2 flex flex-col">
@@ -15,3 +24,10 @@
 		<DayLink link="/day2" title="Cookie Counter" />
 	</ol>
 </section>
+
+<footer>
+	Made by <a href="https:jesirgb.com" class="underline hover:text-primary transition-colors"
+		>Jesús Rascón</a
+	>. Typeset in
+	<a href="https://djr.com/fern" class="underline hover:text-primary transition-colors">Fern</a>
+</footer>

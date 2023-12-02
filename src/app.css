@@ -1,3 +1,14 @@
+@font-face {
+	font-family: 'Fern';
+	src: local('Fern'),
+		url('https://jesi-rgb-fonts.s3.eu-west-3.amazonaws.com/FernVariable-Roman-VF.woff2');
+}
+@font-face {
+	font-family: 'Fern Ornaments';
+	src: local('Fern Ornaments'),
+		url('https://jesi-rgb-fonts.s3.eu-west-3.amazonaws.com/FernOrnaments-Regular.woff2');
+}
+
 /* Write your global styles here, in PostCSS syntax */
 @tailwind base;
 @tailwind components;
