@@ -31,4 +31,10 @@
 		>Jesús Rascón</a
 	>. <br /> Typeset in
 	<a href="https://djr.com/fern" class="underline hover:text-primary transition-colors">Fern</a>.
+	<br />
+	Code in
+	<a
+		class="underline hover:text-primary transition-colors"
+		href="https://github.com/jesi-rgb/svelte-advent-code">Github</a
+	>.
 </footer>
