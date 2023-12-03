@@ -5,22 +5,37 @@
 		isChecked: boolean;
 		id: number;
 	};
+
 	import { tweened } from 'svelte/motion';
 	import { backOut, elasticOut, quintInOut } from 'svelte/easing';
+	import { interpolateLab } from 'd3-interpolate';
 	import BackButton from '$lib/Components/BackButton.svelte';
 	import Heading from '$lib/Components/Heading.svelte';
+
+	export let data;
 
 	const weight = tweened(0, {
 		duration: 300,
 		easing: backOut
 	});
 
-	export let data;
+	const colors = ['#9FE88D', '#EFD057', '#FE7D5C'];
+	const color = tweened(colors[0], {
+		duration: 300,
+		interpolate: interpolateLab
+	});
+
 	let presents: Present[] = data.data;
 
 	$: selectedSum = presents.reduce((sum, item) => (item.isChecked ? sum + item.weight : sum), 0);
 	$: weight.set(selectedSum);
 	$: weightLeft = 100 - selectedSum;
+	$: if (weightLeft < 60) {
+		color.set(colors[1]);
+	}
+	$: if (weightLeft < 20) {
+		color.set(colors[2]);
+	}
 
 	function handleCheckboxChange(id: number) {
 		presents = presents.map((item) =>
@@ -43,12 +58,12 @@
 		width="100%"
 		class="my-10 border-2 border-dashed border-base-content rounded-xl"
 	>
-		<rect x="0" y="0" height="100px" width="{$weight}%" class="fill-primary" />
+		<rect x="0" y="0" height="100px" width="{$weight}%" fill={$color} />
 	</svg>
 
 	{#if presents}
 		<div class="border-2 border-dashed border-base-content rounded-xl h-[500px] overflow-y-scroll">
-			<table class="table font-normal mx-auto table-pin-rows">
+			<table class="table md:table-lg font-normal mx-auto table-pin-rows">
 				<thead>
 					<tr>
 						<th></th>
