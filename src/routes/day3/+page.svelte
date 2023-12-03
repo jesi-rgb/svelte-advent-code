@@ -6,6 +6,7 @@
 		id: number;
 	};
 
+	import BackButton from '$lib/Components/BackButton.svelte';
 	import Heading from '$lib/Components/Heading.svelte';
 
 	export let data;
@@ -21,6 +22,7 @@
 	}
 </script>
 
+<BackButton />
 <Heading>Sleigh Load Balancer™</Heading>
 
 <p>Let's pack this booga up.</p>
