@@ -23,6 +23,7 @@
 		<DayLink link="/day1" title="Tally Dashboard" />
 		<DayLink link="/day2" title="Cookie Counter" />
 		<DayLink link="/day3" title="Sleigh Load Balancer™" />
+		<DayLink link="/day4" title="Santa’s Heart Rate Monitor™" />
 	</ol>
 </section>
 
