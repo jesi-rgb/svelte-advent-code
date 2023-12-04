@@ -50,7 +50,7 @@
 
 <BackButton />
 <Heading>Santa’s Heart Rate Monitor (SHRM™)</Heading>
-<p>Let us see how's the state of this absolute goated bro</p>
+<p>Watch Santa's heart rate in a heart beat. Pay close attention to those spikes!</p>
 
 <div class="my-10">
 	{#if data}
@@ -61,15 +61,15 @@
 					<div class="font-bold tabular-nums text-5xl">{data.heartRate}</div>
 				</div>
 				<div class=" flex items-baseline justify-between w-full">
-					<div class="opacity-50">Avg 10s</div>
+					<div class="opacity-50 italic">Avg 10s</div>
 					<div class="tabular-nums text-2xl">{avgTenSeconds.toFixed(2)}</div>
 				</div>
 				<div class="flex items-baseline w-full justify-between">
-					<div class="opacity-50">Avg 30s</div>
+					<div class="opacity-50 italic">Avg 30s</div>
 					<div class="tabular-nums text-2xl">{avgThirtySeconds.toFixed(2)}</div>
 				</div>
 				<div class="flex items-baseline w-full justify-between">
-					<div class="opacity-50">Avg 60s</div>
+					<div class="opacity-50 italic">Avg 60s</div>
 					<div class="tabular-nums text-2xl">{avgMinute.toFixed(2)}</div>
 				</div>
 			</div>
@@ -78,6 +78,8 @@
 			</div>
 		</div>
 	{:else}
-		<div class="text-xl">fetching data from the North Pole Health Database...</div>
+		<div class="text-xl">
+			Hold tight, fetching data from the <em>North Pole Health Database™</em>...
+		</div>
 	{/if}
 </div>
