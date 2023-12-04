@@ -50,7 +50,7 @@
 
 {#if data}
 	<div bind:clientWidth={width}>
-		<svg {width} {height} class="border border-dashed rounded-xl bg-base-200">
+		<svg {height} class="border border-dashed rounded-xl bg-base-200">
 			<g class="fill-base-content" transform="translate(0, {height - marginBottom})">
 				<line class="stroke-base-content" x1={marginLeft} x2={width - marginRight} />
 

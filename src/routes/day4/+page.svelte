@@ -1,4 +1,5 @@
 <script lang="ts">
+	import BackButton from '$lib/Components/BackButton.svelte';
 	import Heading from '$lib/Components/Heading.svelte';
 	import LineChart from '$lib/Components/LineChart.svelte';
 	import { onMount } from 'svelte';
@@ -47,6 +48,7 @@
 	});
 </script>
 
+<BackButton />
 <Heading>Santa’s Heart Rate Monitor (SHRM™)</Heading>
 <p>Let us see how's the state of this absolute goated bro</p>
 
