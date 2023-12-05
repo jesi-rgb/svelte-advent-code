@@ -9,6 +9,7 @@
 
 	// Receive plot data as prop.
 	export let data: any;
+	export let property: string;
 
 	const tweenScaleL = tweened(0, {
 		duration: 1500
@@ -38,23 +39,23 @@
 	$: if (data.length > 0) {
 		xScale = scaleLinear([$tweenScaleL, $tweenScaleR], [marginLeft, width - marginRight]);
 		yScale = scaleLinear(
-			[min(data, (d) => d.heartRate) - 2, max(data, (d: any) => d.heartRate) + 2],
+			[min(data, (d) => d[property]) - 2, max(data, (d: any) => d[property]) + 2],
 			[height - marginBottom, marginTop]
 		);
 	}
 
 	$: linePath = line()
 		.x((d) => xScale(d.index))
-		.y((d) => yScale(d.heartRate));
+		.y((d) => yScale(d[property]));
 </script>
 
 {#if data}
 	<div bind:clientWidth={width}>
-		<svg {height} class="border border-dashed rounded-xl bg-base-200">
+		<svg {width} {height} class="border border-dashed rounded-xl bg-base-200">
 			<g class="fill-base-content" transform="translate(0, {height - marginBottom})">
 				<line class="stroke-base-content" x1={marginLeft} x2={width - marginRight} />
 
-				{#each xScale.ticks(3) as tick}
+				{#each xScale.ticks(5) as tick}
 					<!-- X-Axis Ticks -->
 					<line class="stroke-base-content" x1={xScale(tick)} x2={xScale(tick)} y1={0} y2={6} />
 
@@ -130,7 +131,7 @@
 			</defs>
 			<g clip-path="url(#cut-off-bottom)">
 				{#each data as point, i}
-					<circle r="2" cy={yScale(point.heartRate)} cx={xScale(i)} class="fill-primary"></circle>
+					<circle r="2" cy={yScale(point[property])} cx={xScale(i)} class="fill-primary"></circle>
 				{/each}
 				<path in:draw fill="none" class="stroke-primary" opacity=".5" d={linePath(data)}></path>
 			</g>

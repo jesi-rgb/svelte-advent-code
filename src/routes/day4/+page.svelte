@@ -74,7 +74,7 @@
 				</div>
 			</div>
 			<div class="mx-auto md:w-1/2">
-				<LineChart data={history} />
+				<LineChart data={history} property="heartRate" />
 			</div>
 		</div>
 	{:else}
