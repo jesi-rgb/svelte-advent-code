@@ -8,3 +8,11 @@ export interface Task {
 	minutesTaken: number;
 	date: string;
 }
+
+export interface DisplayData {
+	elf: string;
+	total_creation: Array<number>;
+	total_wrapping: Array<number>;
+	creation_rate: string;
+	wrapping_rate: string;
+}

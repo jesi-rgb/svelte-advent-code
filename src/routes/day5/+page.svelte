@@ -1,19 +1,12 @@
 <script lang="ts">
-	import type { Task } from '$lib';
+	import type { Task, DisplayData } from '$lib';
 	import { fly } from 'svelte/transition';
 	import BackButton from '$lib/Components/BackButton.svelte';
 	import Heading from '$lib/Components/Heading.svelte';
 	import { onMount } from 'svelte';
 	import { groupBy } from '$lib/utils.js';
 	import LineChart from '$lib/Components/LineChart.svelte';
-
-	type DisplayData = {
-		elf: string;
-		total_creation: Array<number>;
-		total_wrapping: Array<number>;
-		creation_rate: string;
-		wrapping_rate: string;
-	};
+	import BarChart from '$lib/Components/BarChart.svelte';
 
 	export let data;
 	let history: Task[] = data.data;
@@ -86,9 +79,11 @@
 		history = json.reverse();
 	}
 
+	let time = new Date();
 	onMount(() => {
 		const interval = setInterval(() => {
 			fetchProduction();
+			time = new Date();
 		}, 5000);
 
 		return () => {
@@ -103,29 +98,32 @@
 
 <p>Visualizing productivity for a set of alienated elves</p>
 
-<main class="my-20 flex flex-col space-y-10">
-	<div class="flex flex-col items-end text-xl text-right space-y-3">
-		<div class="">
+<main class="my-20 flex flex-col space-y-14">
+	<div class="grid grid-cols-2 md:grid-cols-4 text-xl gap-2">
+		<div class=" bg-base-200 p-3 rounded-md">
 			<span class="opacity-70 italic">Current time:</span>
-			<span class="tabular-nums font-bold text-2xl">{new Date().toLocaleTimeString()}</span>
+			<span class="tabular-nums font-bold text-2xl">{time.toLocaleTimeString()}</span>
 		</div>
-		<div>
-			<span class="opacity-70 italic">Toys wrapped up:</span>
-			<span class="text-5xl font-bold">{totalToys}</span>
+		<div class="bg-base-200 p-3">
+			<div class="opacity-70 italic">Toys wrapped up:</div>
+			<div class="text-4xl font-bold">{totalToys}</div>
 		</div>
-		<div>
-			⭐ <span class="opacity-70 italic">Avg Toy Creation Time:</span>
-			<span class="text-5xl font-bold">{avgToyCreationTime.toFixed(2)} </span>
+		<div class="bg-base-300 p-3">
+			<div class="opacity-70 italic">Avg Creation Time:</div>
+			<div class="text-4xl font-bold">{avgToyCreationTime.toFixed(2)}</div>
 		</div>
-		<div>
-			🎁 <span class="opacity-70 italic">Avg Toy Wrapping Time:</span>
-			<span class="text-5xl font-bold">{avgToyWrappingTime.toFixed(2)} </span>
+		<div class="bg-base-300 p-3">
+			<div class="opacity-70 italic">Avg Wrapping Time:</div>
+			<div class="text-4xl font-bold">{avgToyWrappingTime.toFixed(2)}</div>
 		</div>
 	</div>
+
 	<section>
 		<h2 class="text-3xl font-bold mb-5">Presents per hour</h2>
 		<LineChart data={hourGrouping} property="presents" />
 	</section>
+
+	<BarChart data={displayElfData} />
 
 	<section>
 		<h2 class="text-3xl font-bold mb-5">Elf Performance</h2>
@@ -159,9 +157,8 @@
 
 	<section>
 		<h2 class="text-3xl font-bold mb-5">Event History</h2>
-		<div
-			class="h-[900px] overflow-y-scroll overflow-x-scroll md:ml-0 border-2 border-dashed border-base-content rounded-xl"
-		>
+		<p class="mb-2">Only showing the latest 20 entries</p>
+		<div class=" overflow-x-scroll md:ml-0 border-2 border-dashed border-base-content rounded-xl">
 			{#if history}
 				<table class="table-xs md:table-lg table table-pin-rows text-right">
 					<thead>
@@ -174,11 +171,11 @@
 						</tr>
 					</thead>
 					<tbody>
-						{#each history as event, i}
+						{#each history.slice(0, 20) as event, i}
 							{#key changedData}
 								<tr
 									in:fly={{ x: -10, duration: 300, delay: 10 / (i + 1) }}
-									class="hover:bg-base-200 transition-all hover:font-bold"
+									class="hover:bg-base-200 transition-all"
 								>
 									<td class="italic font-semibold text-lg">{event.elf}</td>
 									<td class="tabular-nums">{new Date(event.date).toLocaleDateString()}</td>
