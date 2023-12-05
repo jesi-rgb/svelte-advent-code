@@ -24,6 +24,7 @@
 		<DayLink link="/day2" title="Cookie Counter" />
 		<DayLink link="/day3" title="Sleigh Load Balancer™" />
 		<DayLink link="/day4" title="Santa’s Heart Rate Monitor™" />
+		<DayLink link="/day5" title="Elf Productivity Monitor" />
 	</ol>
 </section>
 
