@@ -131,7 +131,12 @@
 			</defs>
 			<g clip-path="url(#cut-off-bottom)">
 				{#each data as point, i}
-					<circle r="2" cy={yScale(point[property])} cx={xScale(i)} class="fill-primary"></circle>
+					<circle
+						r="2"
+						cy={yScale(point[property])}
+						cx={xScale(point['index'])}
+						class="fill-primary"
+					></circle>
 				{/each}
 				<path in:draw fill="none" class="stroke-primary" opacity=".5" d={linePath(data)}></path>
 			</g>

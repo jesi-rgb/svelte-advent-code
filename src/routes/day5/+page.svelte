@@ -32,10 +32,20 @@
 	$: elfGrouping = groupBy(history, (h: Task) => h.elf);
 	$: hourGrouping = Object.values(groupBy(history, (h: Task) => new Date(h.date).getHours())).map(
 		(a: Array<Task>, i: number) => {
-			return { index: i, presents: a.filter((f: Task) => f.task == 'WRAPPED_PRESENT').length };
+			return { index: i + 1, presents: a.filter((f: Task) => f.task == 'WRAPPED_PRESENT').length };
 		}
 	);
 	$: totalToys = hourGrouping.map((a) => a.presents).reduce((a, b) => a + b, 0);
+	$: avgToyCreationTime =
+		history
+			.filter((f) => f.task == 'CREATED_TOY')
+			.map((h) => h.minutesTaken)
+			.reduce((a, b) => a + b, 0) / history.length;
+	$: avgToyWrappingTime =
+		history
+			.filter((f) => f.task == 'WRAPPED_PRESENT')
+			.map((h) => h.minutesTaken)
+			.reduce((a, b) => a + b, 0) / history.length;
 
 	$: console.log(hourGrouping);
 
@@ -94,14 +104,22 @@
 <p>Visualizing productivity for a set of alienated elves</p>
 
 <main class="my-20 flex flex-col space-y-10">
-	<div class="flex flex-col items-end text-xl text-right">
+	<div class="flex flex-col items-end text-xl text-right space-y-3">
 		<div class="">
-			<span class="opacity-70">Current time:</span>
+			<span class="opacity-70 italic">Current time:</span>
 			<span class="tabular-nums font-bold text-2xl">{new Date().toLocaleTimeString()}</span>
 		</div>
 		<div>
-			<span class="opacity-70">Toys wrapped up 🎁:</span>
+			<span class="opacity-70 italic">Toys wrapped up:</span>
 			<span class="text-5xl font-bold">{totalToys}</span>
+		</div>
+		<div>
+			⭐ <span class="opacity-70 italic">Avg Toy Creation Time:</span>
+			<span class="text-5xl font-bold">{avgToyCreationTime.toFixed(2)} </span>
+		</div>
+		<div>
+			🎁 <span class="opacity-70 italic">Avg Toy Wrapping Time:</span>
+			<span class="text-5xl font-bold">{avgToyWrappingTime.toFixed(2)} </span>
 		</div>
 	</div>
 	<section>
@@ -111,25 +129,27 @@
 
 	<section>
 		<h2 class="text-3xl font-bold mb-5">Elf Performance</h2>
-		<div class="overflow-x-scroll md:ml-0 border-2 border-dashed border-base-content rounded-xl">
-			<table class="table md:table-lg table-xs">
+		<div
+			class="h-[600px] overflow-x-scroll md:ml-0 border-2 border-dashed border-base-content rounded-xl"
+		>
+			<table class="table text-right table-pin-rows">
 				<thead>
-					<tr>
-						<td>Elf</td>
+					<tr class="text-xl">
+						<td class="text-right">Elf</td>
 						<td>No. ⭐</td>
 						<td>No. 🎁</td>
-						<td>Avg ⭐ Speed</td>
-						<td>Avg 🎁 Speed</td>
+						<td>Avg ⭐ Rate</td>
+						<td>Avg 🎁 Rate</td>
 					</tr>
 				</thead>
 				<tbody>
 					{#each displayElfData as d}
-						<tr>
-							<td>{d['elf']}</td>
-							<td class="tabular-nums">{d['total_creation']}</td>
-							<td class="tabular-nums">{d['total_wrapping']}</td>
-							<td class="tabular-nums">{d['creation_rate']}</td>
-							<td class="tabular-nums">{d['wrapping_rate']}</td>
+						<tr class="hover:bg-base-200 hover:font-bold transition-all text-right">
+							<td class="font-bold text-lg italic text-right">{d['elf']}</td>
+							<td class="tabular-nums text-xl">{d['total_creation']}</td>
+							<td class="tabular-nums text-xl">{d['total_wrapping']}</td>
+							<td class="tabular-nums text-xl">{d['creation_rate']}</td>
+							<td class="tabular-nums text-xl">{d['wrapping_rate']}</td>
 						</tr>
 					{/each}
 				</tbody>
@@ -140,10 +160,10 @@
 	<section>
 		<h2 class="text-3xl font-bold mb-5">Event History</h2>
 		<div
-			class=" h-[900px] overflow-y-scroll overflow-x-scroll md:ml-0 border-2 border-dashed border-base-content rounded-xl"
+			class="h-[900px] overflow-y-scroll overflow-x-scroll md:ml-0 border-2 border-dashed border-base-content rounded-xl"
 		>
 			{#if history}
-				<table class="table-xs md:table-lg table table-pin-rows">
+				<table class="table-xs md:table-lg table table-pin-rows text-right">
 					<thead>
 						<tr class="text-xl">
 							<td>Elf</td>
@@ -156,12 +176,15 @@
 					<tbody>
 						{#each history as event, i}
 							{#key changedData}
-								<tr in:fly={{ x: -10, duration: 300, delay: 10 / (i + 1) }}>
+								<tr
+									in:fly={{ x: -10, duration: 300, delay: 10 / (i + 1) }}
+									class="hover:bg-base-200 transition-all hover:font-bold"
+								>
 									<td class="italic font-semibold text-lg">{event.elf}</td>
 									<td class="tabular-nums">{new Date(event.date).toLocaleDateString()}</td>
 									<td class="tabular-nums">{new Date(event.date).toLocaleTimeString()}</td>
 									<td class="text-center text-xl">{displayTask[event.task]}</td>
-									<td class="tabular-nums text-right text-lg">{event.minutesTaken}</td>
+									<td class="tabular-nums text-right text-xl">{event.minutesTaken}</td>
 								</tr>
 							{/key}
 						{/each}
