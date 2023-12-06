@@ -19,16 +19,33 @@
 </p>
 
 <section class="my-10">
+	<div style="font-family: Fern Ornaments;" class="text-center text-2xl text-secondary mb-3">
+		IFP
+	</div>
 	<ol class="list-decimal list-inside space-y-2 flex flex-col">
 		<DayLink link="/day1" title="Tally Dashboard" />
 		<DayLink link="/day2" title="Cookie Counter" />
 		<DayLink link="/day3" title="Sleigh Load Balancer™" />
 		<DayLink link="/day4" title="Santa’s Heart Rate Monitor™" />
 		<DayLink link="/day5" title="Elf Productivity Monitor" />
+		<DayLink link="/day6" title="BPM Counter" />
 	</ol>
+	<div style="font-family: Fern Ornaments;" class="text-center text-2xl text-secondary mt-3">
+		IGP
+	</div>
 </section>
 
-<footer>
+<div class="opacity-70 my-10">
+	<p>Some of the (auto-imposed rules) I want to follow:</p>
+	<ol class="list-decimal">
+		<li>You can <em>only</em> work on a prompt on its given day.</li>
+		<li>Use as few tools as you can. As barebones as possible.</li>
+		<li>Reinvent the wheel, only if it's fun to do so.</li>
+		<li>Develop a consistent style all accross the project.</li>
+	</ol>
+</div>
+
+<footer class="opacity-80">
 	Made by <a href="https:jesirgb.com" class="underline hover:text-primary transition-colors"
 		>Jesús Rascón</a
 	>. <br /> Typeset in
