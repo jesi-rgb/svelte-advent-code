@@ -9,6 +9,7 @@
 
 	let bpmDisplay = 0;
 	let tapCounter = 0;
+	let signature = 4;
 
 	let tap1: Date;
 	let tap2: Date;
@@ -43,7 +44,13 @@
 
 <BackButton />
 <Heading>BPM Counter</Heading>
-<p>Let's get those booties bootin'</p>
+<p>
+	Let's get those booties bootin'. Tap or click on the green button, or use the <span class="kbd"
+		>Space</span
+	>
+	or any of the arrows <span class="kbd">←</span> <span class="kbd">↑</span>
+	<span class="kbd">↓</span> <span class="kbd">→</span> to set time!
+</p>
 
 <main class="my-10">
 	<div class="text-center text-4xl tabular-nums">
@@ -58,7 +65,18 @@
 		max="300"
 		step="1"
 	/>
-	<div class="text-center text-4xl tabular-nums">{(bpmDisplay % 4) + 1}</div>
+	<div class="text-center text-4xl tabular-nums">
+		{(bpmDisplay % signature) + 1}
+		<span class="opacity-70"
+			>/ <span
+				on:keydown={(e) => {
+					if (e.key == 'Enter') e.preventDefault();
+				}}
+				bind:innerHTML={signature}
+				contenteditable>{signature}</span
+			></span
+		>
+	</div>
 
 	<div class="flex justify-between">
 		<div class="w-10 h-10 relative mx-auto">
@@ -73,7 +91,24 @@
 			{#key tapCounter}
 				<div
 					in:scale={{ easing: elasticOut, duration: 1000 }}
-					class="w-10 h-10 absolute bg-base-content rounded-full"
+					on:click={(e) => {
+						tapCounter += 1;
+
+						let millisDiff = 0;
+						if (tapCounter % 2 == 0) {
+							tap2 = new Date();
+						} else {
+							tap1 = new Date();
+						}
+
+						if (tap1 && tap2) {
+							millisDiff = Math.abs(tap2 - tap1);
+
+							bpm = (1000 * 60) / millisDiff;
+							updateDynamicTimeout();
+						}
+					}}
+					class="w-10 h-10 absolute bg-primary rounded-full"
 				></div>
 			{/key}
 		</div>
