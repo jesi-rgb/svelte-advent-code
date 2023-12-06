@@ -1,7 +1,7 @@
-<script>
+<script lang="ts">
 	import { onMount, onDestroy } from 'svelte';
 
-	let intervalId;
+	let intervalId: number;
 	let dynamicTimeout = 1000; // Initial timeout value (in milliseconds)
 
 	// Function to be executed at intervals

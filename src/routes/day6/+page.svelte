@@ -2,17 +2,19 @@
 	import BackButton from '$lib/Components/BackButton.svelte';
 	import Heading from '$lib/Components/Heading.svelte';
 	import { onDestroy, onMount } from 'svelte';
-	import { backIn, backOut, elasticOut, quintIn } from 'svelte/easing';
-	import { scale, fade } from 'svelte/transition';
+	import { elasticOut } from 'svelte/easing';
+	import { scale } from 'svelte/transition';
 
 	let bpm = 120; //beats per minute
 
 	let bpmDisplay = 0;
+	let tapCounter = 0;
 
-	const add = () => (bpmDisplay += 1);
+	let tap1: Date;
+	let tap2: Date;
 
 	let intervalId: number;
-	let dynamicTimeout: number = (1000 * 60) / bpm;
+	let dynamicTimeout = (1000 * 60) / bpm;
 
 	// Function to be executed at intervals
 	function intervalFunction() {
@@ -44,7 +46,9 @@
 <p>Let's get those booties bootin'</p>
 
 <main class="my-10">
-	<div class="text-center text-4xl tabular-nums">{bpm} <span class="opacity-70">bpm</span></div>
+	<div class="text-center text-4xl tabular-nums">
+		{bpm.toFixed(2)} <span class="opacity-70">bpm</span>
+	</div>
 	<input
 		class="range"
 		bind:value={bpm}
@@ -54,14 +58,46 @@
 		max="300"
 		step="1"
 	/>
-	<div class="text-center text-4xl tabular-nums">{bpmDisplay}</div>
+	<div class="text-center text-4xl tabular-nums">{(bpmDisplay % 4) + 1}</div>
 
-	<div class="w-10 h-10 relative mx-auto">
-		{#key bpmDisplay}
-			<div
-				in:scale={{ easing: elasticOut, duration: dynamicTimeout }}
-				class="w-10 h-10 absolute bg-base-content rounded-full"
-			></div>
-		{/key}
+	<div class="flex justify-between">
+		<div class="w-10 h-10 relative mx-auto">
+			{#key bpmDisplay}
+				<div
+					in:scale={{ easing: elasticOut, duration: dynamicTimeout }}
+					class="w-10 h-10 absolute bg-base-content rounded-full"
+				></div>
+			{/key}
+		</div>
+		<div class="w-10 h-10 relative mx-auto">
+			{#key tapCounter}
+				<div
+					in:scale={{ easing: elasticOut, duration: 1000 }}
+					class="w-10 h-10 absolute bg-base-content rounded-full"
+				></div>
+			{/key}
+		</div>
 	</div>
 </main>
+
+<svelte:window
+	on:keydown={(e) => {
+		if (e.key === ' ' || e.key.includes('Arrow')) {
+			tapCounter += 1;
+
+			let millisDiff = 0;
+			if (tapCounter % 2 == 0) {
+				tap2 = new Date();
+			} else {
+				tap1 = new Date();
+			}
+
+			if (tap1 && tap2) {
+				millisDiff = Math.abs(tap2 - tap1);
+
+				bpm = (1000 * 60) / millisDiff;
+				updateDynamicTimeout();
+			}
+		}
+	}}
+/>
