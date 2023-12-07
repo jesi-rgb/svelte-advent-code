@@ -25,12 +25,19 @@
 
 <Heading>Morse Code Translator</Heading>
 
-<main class="my-10 w-full">
-	<input
-		type="text"
-		bind:value={inputText}
-		placeholder="Input text"
-		class="input input-bordered w-full max-w-xs"
-	/>
-	<div class="">{outputText}</div>
+<main class="my-10 w-full mx-auto">
+	<label for="inputMorse">
+		<span class="opacity-70">Input text</span>
+		<input
+			id="inputMorse"
+			type="text"
+			bind:value={inputText}
+			placeholder="Input text"
+			class="text-2xl w-full input input-bordered"
+		/>
+	</label>
+	<div class="bg-base-200 px-5 py-4 rounded-xl mt-5">
+		<div>Output</div>
+		<div class="text-primary text-3xl font-bold">{outputText}</div>
+	</div>
 </main>

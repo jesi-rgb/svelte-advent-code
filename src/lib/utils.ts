@@ -37,17 +37,17 @@ export function toMorse(data: string) {
 	data = data.toUpperCase();
 	let words = data.split(' ');
 
-	let morse = [];
+	let morse: string[] = [];
 	words.forEach((w) => {
 		let chars = w.split('');
 
-		let character = [];
+		let character: string[] = [];
 		for (let c = 0; c < chars.length; c++) {
 			character.push(generateMorseCharacter(chars[c]));
 		}
 		character = character.join(' ');
 		morse.push(character);
 	});
-	morse = morse.join(' ✥ ');
+	morse = morse.join(' / ');
 	return morse;
 }

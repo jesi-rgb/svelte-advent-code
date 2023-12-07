@@ -9,7 +9,7 @@
 	<div style="font-family: Fern Ornaments;">IGQTREFP</div>
 </div>
 <Heading>
-	<div class="text-center">Advent of Code 2023</div></Heading
+	<div class="text-center font-normal">ADVENT OF CODE 2023</div></Heading
 >
 
 <p class="text-2xl">
