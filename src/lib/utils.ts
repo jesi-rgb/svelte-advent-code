@@ -11,9 +11,9 @@ function generateMorseCharacter(c: string) {
 
 	if (parentIndex % 2 == 0) {
 		parentIndex -= 1;
-		morseChar += '-';
+		morseChar += '–';
 	} else {
-		morseChar += '.';
+		morseChar += '·';
 	}
 
 	while (alphabet[parentIndex] != '^') {
@@ -22,9 +22,9 @@ function generateMorseCharacter(c: string) {
 
 		if (currentIndex % 2 == 0) {
 			parentIndex -= 1;
-			morseChar += '-';
+			morseChar += '–';
 		} else {
-			morseChar += '.';
+			morseChar += '·';
 		}
 
 		currentChar = alphabet[parentIndex];
