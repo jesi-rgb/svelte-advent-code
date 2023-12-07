@@ -18,7 +18,7 @@
 		const morseCode = outputText;
 		const audioContext = new (window.AudioContext || window.webkitAudioContext)();
 		const timeUnit = 100; // Adjust as needed
-		const characterPauseDuration = 4 * timeUnit;
+		const characterPauseDuration = 3 * timeUnit;
 
 		const morseMap = {
 			'·': { frequency: 523.3, duration: timeUnit },

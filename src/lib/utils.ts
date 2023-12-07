@@ -1,6 +1,6 @@
 export const groupBy = (x, f) => x.reduce((a, b, i) => ((a[f(b, i, x)] ||= []).push(b), a), {});
 
-const alphabet = '^ETIANMSURWDKGOHVF L PJBXCYZQ'.split('');
+export const alphabet = '^ETIANMSURWDKGOHVF L PJBXCYZQ'.split('');
 
 function generateMorseCharacter(c: string) {
 	let indexInAlphabet = alphabet.findIndex((e) => e === c);
@@ -35,7 +35,13 @@ function generateMorseCharacter(c: string) {
 
 export function toMorse(data: string) {
 	data = data.toUpperCase();
-	let words = data.split(' ');
+
+	const filtered = data
+		.split('')
+		.filter((e) => alphabet.includes(e))
+		.join('');
+
+	let words = filtered.split(' ');
 
 	let morse: string[] = [];
 	words.forEach((w) => {
