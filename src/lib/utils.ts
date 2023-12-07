@@ -49,5 +49,5 @@ export function toMorse(data: string) {
 		morse.push(character);
 	});
 	morse = morse.join(' ✥ ');
-	console.log(morse);
+	return morse;
 }
