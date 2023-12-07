@@ -29,6 +29,7 @@
 		<DayLink link="/day4" title="Santa’s Heart Rate Monitor™" />
 		<DayLink link="/day5" title="Elf Productivity Monitor" />
 		<DayLink link="/day6" title="BPM Counter" />
+		<DayLink link="/day7" title="Morse Code Translator" />
 	</ol>
 	<div style="font-family: Fern Ornaments;" class="text-center text-2xl text-secondary mt-3">
 		IGP
@@ -37,7 +38,7 @@
 
 <div class="opacity-70 my-10">
 	<p>Some of the (auto-imposed rules) I want to follow:</p>
-	<ol class="list-decimal">
+	<ol class="list-decimal list-inside">
 		<li>You can <em>only</em> work on a prompt on its given day.</li>
 		<li>Use as few tools as you can. As barebones as possible.</li>
 		<li>Reinvent the wheel, only if it's fun to do so.</li>
