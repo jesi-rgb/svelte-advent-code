@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { confetti } from '@neoconfetti/svelte';
 	import { fade } from 'svelte/transition';
 	import BackButton from '$lib/Components/BackButton.svelte';
 	import Card from '$lib/Components/Card.svelte';
@@ -27,7 +28,7 @@
 	});
 
 	let startTime = new Date();
-	let time = startTime;
+	let time = new Date() - startTime;
 	$: minutes = new Date(time).getMinutes();
 	$: seconds = new Date(time).getSeconds();
 
@@ -82,3 +83,18 @@
 		{minutes.toString().padStart(2, '0')}:{seconds.toString().padStart(2, '0')}
 	</div>
 </div>
+
+{#if foundPairs === 24}
+	<div class="confetti" use:confetti={{ stageWidth: innerWidth, stageHeight: outerWidth }} />
+{/if}
+
+<style>
+	.confetti {
+		position: fixed;
+		width: 100%;
+		height: 100%;
+		left: 50%;
+		top: 30%;
+		pointer-events: none;
+	}
+</style>
