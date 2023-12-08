@@ -16,11 +16,6 @@
 	$: selectedCards = Array(cards.length).fill(false);
 	let foundCards: number[] = [];
 
-	function resetCards() {
-		flippedCards = [];
-		selectedCards = selectedCards.fill(false);
-	}
-
 	let reset_timeout: number;
 
 	onDestroy(() => {
@@ -48,11 +43,10 @@
 			reset_timeout = setTimeout(() => {
 				flippedCards = [];
 				selectedCards = selectedCards.fill(false);
-			}, 1000);
+			}, 700);
 		} else {
 			foundPairs += 1;
 			foundCards = [...foundCards, flippedCards[0]];
-			// resetCards();
 			flippedCards = [];
 			selectedCards = selectedCards.fill(false);
 		}
@@ -61,9 +55,13 @@
 
 <BackButton />
 <Heading>Santa's <em>Mysterious</em> Deck of Doubles</Heading>
+<p>
+	There are 24 pairs of cards. Tap on two cards to see if they're the same. They'll flip back if
+	not, so pay attention!
+</p>
 
 <div
-	class="grid grid-cols-6 md:grid-cols-12 bg-base-200 gap-1 mx-auto p-2 border-2 border-dashed rounded-xl"
+	class="grid grid-cols-6 md:grid-cols-12 bg-base-200 mt-10 gap-1 mx-auto p-2 border-2 border-dashed rounded-xl"
 >
 	{#each cards as card, i}
 		<Card bind:flippedCards {card} {foundCards} bind:selected={selectedCards[i]} />
