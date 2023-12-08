@@ -9,6 +9,6 @@ export async function load({ fetch }) {
 		cards.push({ index: i, url: url });
 	}
 
-	// shuffle(cards);
+	shuffle(cards);
 	return { cards };
 }
