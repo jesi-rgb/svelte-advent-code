@@ -30,6 +30,7 @@
 		<DayLink link="/day5" title="Elf Productivity Monitor" />
 		<DayLink link="/day6" title="BPM Counter" />
 		<DayLink link="/day7" title="Morse Code Translator" />
+		<DayLink link="/day8" title="Santa's Mysterious Deck of Doubles" />
 	</ol>
 	<div style="font-family: Fern Ornaments;" class="text-center text-2xl text-secondary mt-3">
 		IGP

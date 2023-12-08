@@ -16,3 +16,8 @@ export interface DisplayData {
 	creation_rate: string;
 	wrapping_rate: string;
 }
+
+export interface CardType {
+	url: string;
+	index: number;
+}
