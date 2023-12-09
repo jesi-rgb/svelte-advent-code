@@ -20,7 +20,7 @@
 
 	// The chart dimensions and margins as optional props.
 
-	let width = 900;
+	let width = 320;
 	let height = 300;
 	let marginTop = 20;
 	let marginRight = 20;

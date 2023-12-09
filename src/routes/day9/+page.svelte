@@ -29,18 +29,26 @@
 	$: dots = parseInt(seconds) % 2 == 0;
 
 	let animationInterval: number;
+	let animationInterval2: number;
 	let spans: HTMLElement[] = [];
-	let randomSpan: HTMLElement;
+	// let randomSpan: HTMLElement;
 
-	function startAnimation() {
+	function startAnimation(delay: number = 1000) {
 		// set an interval to change opacity every second
-		animationInterval = setInterval(() => {
+		let interv;
+		interv = setInterval(() => {
 			// logic to change opacity for a random span
 			const randomIndex = Math.floor(Math.random() * patternLength);
-			randomSpan = spans[randomIndex];
+			let randomSpan = spans[randomIndex];
 
-			randomSpan.style.transition = 'opacity 0.5s ease-in-out';
-			randomSpan.style.opacity = '0.2';
+			randomSpan.style.transition = 'opacity 0.2s ease-in-out';
+			randomSpan.style.opacity = '1';
+			if (Math.random() < 0.5) {
+				randomSpan.style.color = '#9FE88D';
+			}
+			if (Math.random() < 0.2) {
+				randomSpan.style.color = '#FE7D5C';
+			}
 
 			setTimeout(() => {
 				randomSpan.style.transition = 'none';
@@ -48,10 +56,12 @@
 
 			// fade in animation after a short delay
 			setTimeout(() => {
-				randomSpan.style.transition = 'opacity 0.5s ease-in-out';
-				randomSpan.style.opacity = '1';
+				randomSpan.style.transition = 'all 0.8s ease-in-out';
+				randomSpan.style.opacity = '.1';
+				randomSpan.style.color = '#B2CCD6';
 			}, 900);
-		}, 1000);
+		}, delay);
+		return interv;
 	}
 
 	onMount(() => {
@@ -59,13 +69,20 @@
 			time = new Date(christmas - new Date());
 		}, 1000);
 
-		startAnimation();
+		startAnimation(800);
+		startAnimation(1000);
+		startAnimation(1300);
+		startAnimation(1600);
+		startAnimation(1900);
+		startAnimation(2000);
+
 		return () => {
 			clearInterval(interval);
 		};
 	});
 	onDestroy(() => {
 		clearInterval(animationInterval);
+		clearInterval(animationInterval2);
 	});
 </script>
 
@@ -76,7 +93,7 @@
 
 <main class="my-32 md:my-52 relative w-full mx-auto">
 	<div
-		class="absolute overflow-x-clip pattern bottom-[-120px] md:bottom-[-167px] w-fit mx-auto left-0 right-0"
+		class="absolute -z-10 pattern bottom-[-120px] md:bottom-[-167px] w-fit mx-auto left-0 right-0"
 		style="font-family: Fern Ornaments;"
 	>
 		<div class="text-2xl md:text-5xl md:mx-auto md:w-fit">
@@ -85,7 +102,7 @@
 					<span
 						bind:this={spans[i + pattern[0].length * r]}
 						id={i + pattern[0].length * r}
-						class="hover:text-secondary transition-colors cursor-pointer">{c}</span
+						class="hover:opacity-100 transition-opacity opacity-10 cursor-pointer">{c}</span
 					>
 				{/each}
 				<br />
@@ -94,7 +111,7 @@
 	</div>
 	<div
 		style="font-family: Segments;"
-		class="clock bg-base-100 bg-opacity-80 w-full mx-auto rounded-xl border-2 border-dashed p-4 md:p-8 text-center text-4xl md:text-7xl"
+		class="bg-base-100 w-full mx-auto rounded-xl border-2 border-dashed p-4 md:p-8 text-center text-4xl md:text-7xl"
 	>
 		<span class="text-base md:text-3xl opacity-70">
 			{days} d
@@ -109,9 +126,6 @@
 </main>
 
 <style>
-	.clock {
-		filter: drop-shadow(0px 0px 1px #b2ccd6);
-	}
 	.dots {
 		transition: opacity 0.3s;
 	}
