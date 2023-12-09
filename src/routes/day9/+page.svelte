@@ -23,6 +23,19 @@
 			clearInterval(interval);
 		};
 	});
+
+	const pattern = [
+		'RHJTRHJTRHJTRHJHJTRHJTRHJTRHJT',
+		'hrtjhrtjhrtjhrtrtjhrtjhrtjhrtj',
+		'jfghjfghjfghjfgfghjfghjfghjfgh',
+		'FJHGFJHGFJHGFJHJHGFJHGFJHGFJHG',
+		'RHJTRHJTRHJTRHJHJTRHJTRHJTRHJT',
+		'FJHGFJHGFJHGFJHJHGFJHGFJHGFJHG',
+		'RHJTRHJTRHJTRHJHJTRHJTRHJTRHJT',
+		'hrtjhrtjhrtjhrtrtjhrtjhrtjhrtj',
+		'jfghjfghjfghjfgfghjfghjfghjfgh',
+		'FJHGFJHGFJHGFJHJHGFJHGFJHGFJHG'
+	];
 </script>
 
 <BackButton />
@@ -30,12 +43,25 @@
 
 <p>How much time is there left until Christmas?</p>
 
-<main class="my-20">
+<main class="my-32 md:my-52 relative w-full mx-auto">
+	<div
+		class="absolute pattern bottom-[-120px] md:bottom-[-167px] w-fit mx-auto left-0 right-0"
+		style="font-family: Fern Ornaments;"
+	>
+		<div class="text-2xl md:text-5xl md:mx-auto md:w-fit">
+			{#each pattern as row}
+				{#each row as c}
+					<span class="hover:text-secondary transition-all cursor-pointer opacity-80">{c}</span>
+				{/each}
+				<br />
+			{/each}
+		</div>
+	</div>
 	<div
 		style="font-family: Segments;"
-		class="clock bg-base-200 w-fit mx-auto rounded-xl border-2 border-dashed p-4 md:p-8 text-center text-2xl md:text-7xl font-bold tabular-nums"
+		class="clock backdrop-blur-md w-full mx-auto rounded-xl border-2 border-dashed p-4 md:p-8 text-center text-4xl md:text-7xl"
 	>
-		<span class="text-xl md:text-3xl opacity-70">
+		<span class="text-base md:text-3xl opacity-70">
 			{days} d
 		</span>
 
@@ -49,15 +75,19 @@
 
 <style>
 	.clock {
-		filter: drop-shadow(0px 0px 30px #b2ccd699);
+		filter: drop-shadow(0px 0px 2px #2a303c);
 	}
 	.dots {
-		transition: opacity 0.4s;
+		transition: opacity 0.3s;
 	}
 	.on {
 		opacity: 1;
 	}
 	.off {
 		opacity: 0;
+	}
+	.pattern {
+		left: 50%;
+		transform: translateX(-50%);
 	}
 </style>
