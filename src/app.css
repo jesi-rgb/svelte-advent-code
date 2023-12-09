@@ -9,10 +9,15 @@
 	src: local('Fern'),
 		url('https://jesi-rgb-fonts.s3.eu-west-3.amazonaws.com/FernVariable-Italic-VF.woff2');
 }
+
 @font-face {
 	font-family: 'Fern Ornaments';
 	src: local('Fern Ornaments'),
 		url('https://jesi-rgb-fonts.s3.eu-west-3.amazonaws.com/FernOrnaments-Regular.woff2');
+}
+@font-face {
+	font-family: 'Segments';
+	src: local('Segments'), url('/fonts/DSEG14ClassicMini-Italic.woff2');
 }
 
 /* Write your global styles here, in PostCSS syntax */

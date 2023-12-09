@@ -31,6 +31,7 @@
 		<DayLink link="/day6" title="BPM Counter" />
 		<DayLink link="/day7" title="Morse Code Translator" />
 		<DayLink link="/day8" title="Santa's Mysterious Deck of Doubles" />
+		<DayLink link="/day9" title="Modern Festive Clock" />
 	</ol>
 	<div style="font-family: Fern Ornaments;" class="text-center text-2xl text-secondary mt-3">
 		IGP
