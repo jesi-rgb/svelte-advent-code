@@ -18,6 +18,9 @@
 	});
 </script>
 
+{#if seconds == 0}
+	<div class="confetti" use:confetti={{ stageWidth: innerWidth, stageHeight: outerWidth }} />
+{/if}
 <dialog bind:this={modal} id="modal" class="modal">
 	{#if seconds == 0}
 		<div class="confetti" use:confetti={{ stageWidth: innerWidth, stageHeight: outerWidth }} />
