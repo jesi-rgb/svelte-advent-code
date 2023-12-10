@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import { confetti } from '@neoconfetti/svelte';
 
 	let modal: HTMLElement;
 
@@ -18,6 +19,9 @@
 </script>
 
 <dialog bind:this={modal} id="modal" class="modal">
+	{#if seconds == 0}
+		<div class="confetti" use:confetti={{ stageWidth: innerWidth, stageHeight: outerWidth }} />
+	{/if}
 	<div class="modal-box border-2 border-dashed border-opacity-50">
 		<div class="text-center text-secondary text-3xl">
 			<div style="font-family: Fern Ornaments;">W</div>
@@ -46,5 +50,14 @@
 <style>
 	.balance {
 		text-wrap: balance;
+	}
+
+	.confetti {
+		position: fixed;
+		width: 100%;
+		height: 100%;
+		left: 50%;
+		top: 30%;
+		pointer-events: none;
 	}
 </style>
