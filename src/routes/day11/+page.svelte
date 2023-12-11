@@ -18,8 +18,9 @@
 		firstName = '';
 		lastName = '';
 	} else {
-		firstName = firstNames[hashCode(inputText) % firstNames.length];
-		lastName = lastNames[hashCode(inputText) % lastNames.length];
+		const trimmed = inputText.trim();
+		firstName = firstNames[hashCode(trimmed) % firstNames.length];
+		lastName = lastNames[hashCode(trimmed) % lastNames.length];
 	}
 </script>
 
