@@ -20,7 +20,7 @@
 	} else {
 		const trimmed = inputText.trim();
 		firstName = firstNames[hashCode(trimmed) % firstNames.length];
-		lastName = lastNames[hashCode(trimmed.split('').reverse().join('')) % lastNames.length];
+		lastName = lastNames[hashCode(trimmed + trimmed) % lastNames.length];
 	}
 </script>
 
