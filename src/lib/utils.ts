@@ -75,3 +75,14 @@ export function toMorse(data: string) {
 	morse = morse.join(' / ');
 	return morse;
 }
+
+export function hashCode(text: string) {
+	if (text === undefined) return;
+	var hash = 0;
+	for (var i = 0; i < text.length; i++) {
+		var char = text.charCodeAt(i);
+		hash = (hash << 5) - hash + char;
+		hash = hash & hash; // Convert to 32bit integer
+	}
+	return Math.abs(hash);
+}

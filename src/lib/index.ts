@@ -21,3 +21,8 @@ export interface CardType {
 	url: string;
 	index: number;
 }
+
+export interface NamesList {
+	firstNames: string[];
+	lastNames: string[];
+}

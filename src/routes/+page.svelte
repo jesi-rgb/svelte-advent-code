@@ -33,6 +33,7 @@
 		<DayLink link="/day8" title="Santa's Mysterious Deck of Doubles" />
 		<DayLink link="/day9" title="Modern Festive Clock" />
 		<DayLink link="/day10" title="Holiday Greeting Pop-Up" />
+		<DayLink link="/day11" title="Elf Name Generator" />
 	</ol>
 	<div style="font-family: Fern Ornaments;" class="text-center text-2xl text-secondary mt-3">
 		IGP
