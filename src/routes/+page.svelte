@@ -19,10 +19,10 @@
 </p>
 
 <section class="my-10">
-	<div style="font-family: Fern Ornaments;" class="text-center text-2xl text-secondary mb-3">
-		IFP
+	<div class="divider">
+		<div style="font-family: Fern Ornaments;" class="text-2xl text-secondary">IFP</div>
 	</div>
-	<ol class="list-decimal list-inside space-y-2 flex flex-col">
+	<ol class="list-decimal list-inside space-y-2 grid grid-cols-2 items-baseline">
 		<DayLink link="/day1" title="Tally Dashboard" />
 		<DayLink link="/day2" title="Cookie Counter" />
 		<DayLink link="/day3" title="Sleigh Load Balancer™" />
@@ -36,8 +36,9 @@
 		<DayLink link="/day11" title="Elf Name Generator" />
 		<DayLink link="/day12" title="Christmas Card Editor" />
 	</ol>
-	<div style="font-family: Fern Ornaments;" class="text-center text-2xl text-secondary mt-3">
-		IGP
+
+	<div class="divider">
+		<div style="font-family: Fern Ornaments;" class="text-center text-2xl text-secondary">IGP</div>
 	</div>
 </section>
 
@@ -51,15 +52,20 @@
 	</ol>
 </div>
 
-<footer class="opacity-80">
-	Made by <a href="https:jesirgb.com" class="underline hover:text-primary transition-colors"
-		>Jesús Rascón</a
-	>. <br /> Typeset in
-	<a href="https://djr.com/fern" class="underline hover:text-primary transition-colors">Fern</a>.
-	<br />
-	Code in
-	<a
-		class="underline hover:text-primary transition-colors"
-		href="https://github.com/jesi-rgb/svelte-advent-code">Github</a
-	>.
+<footer class="my-10">
+	<div class="divider">
+		<div style="font-family: Fern Ornaments;" class="text-secondary">FRTG</div>
+	</div>
+	<div class="opacity-80">
+		Made by <a href="https:jesirgb.com" class="underline hover:text-primary transition-colors"
+			>Jesús Rascón</a
+		>. <br /> Typeset in
+		<a href="https://djr.com/fern" class="underline hover:text-primary transition-colors">Fern</a>.
+		<br />
+		Code in
+		<a
+			class="underline hover:text-primary transition-colors"
+			href="https://github.com/jesi-rgb/svelte-advent-code">Github</a
+		>.
+	</div>
 </footer>
