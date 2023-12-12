@@ -5,16 +5,20 @@
 
 	export let data;
 	const stickers = data.data;
-	let canvasTexts: string[] = ['Merry\nChristmas!'];
+	let canvasTexts: string[] = ['Merry Christmas!'];
 	let canvasImgs: string[] = ['3'];
-	let canvasOrnaments: string[] = ['X'];
+	let canvasOrnaments: string[] = ['RUYUYUYT'];
 
 	$: textBindings = [];
+	$: ornamentBindings = [];
+
 	$: textSizes = [];
 	$: imgSizes = [];
+	$: ornamentSizes = [];
 
 	let focusedText: number;
 	let focusedImg: number;
+	let focusedOrnament: number;
 </script>
 
 <BackButton />
@@ -27,18 +31,22 @@
 	on:mousedown={() => {
 		focusedText = undefined;
 		focusedImg = undefined;
+		focusedOrnament = undefined;
 	}}
-	class="w-full relative h-[500px] md:h-[800px] bg-base-200 border-2 border-dashed rounded-xl my-10"
+	class="w-full relative h-[500px] md:h-[800px] bg-black/0 border-2 border-dashed rounded-xl my-10"
 >
+	<div class="w-full h-full opacity-60 absolute canvas-bg bg-base-200"></div>
 	{#each canvasTexts as textObject, i}
-		<DraggableComponent>
+		<DraggableComponent pos={{ x: 85, y: 130 }}>
 			<h1
 				contenteditable
 				bind:this={textBindings[i]}
 				style="font-size:{textSizes[i]}px; line-height:{textSizes[i]}px;"
 				on:click={() => {
 					focusedText = i;
+					textBindings[i].select();
 					focusedImg = undefined;
+					focusedOrnament = undefined;
 				}}
 			>
 				{textObject}
@@ -46,21 +54,35 @@
 		</DraggableComponent>
 	{/each}
 	{#each canvasImgs as index, i}
-		<DraggableComponent>
+		<DraggableComponent pos={{ x: 120, y: 200 }}>
 			<img
 				width={imgSizes[i]}
 				on:click={() => {
 					focusedImg = i;
 					focusedText = undefined;
+					focusedOrnament = undefined;
 				}}
 				src={stickers[parseInt(index)].url}
 				alt="Sticker {index}"
 			/>
 		</DraggableComponent>
 	{/each}
-	{#each canvasOrnaments as ornament}
-		<DraggableComponent>
-			<h1 style="font-family: Fern Ornaments;" class="text-4xl" contenteditable>{ornament}</h1>
+	{#each canvasOrnaments as ornament, i}
+		<DraggableComponent pos={{ x: 90, y: 100 }}>
+			<h1
+				bind:this={ornamentBindings[i]}
+				on:click={() => {
+					focusedOrnament = i;
+					focusedText = undefined;
+					focusedImg = undefined;
+				}}
+				style="font-family: 'Fern Ornaments';font-size:{ornamentSizes[
+					i
+				]}px; line-height:{ornamentSizes[i]}px;"
+				contenteditable
+			>
+				{ornament}
+			</h1>
 		</DraggableComponent>
 	{/each}
 </main>
@@ -70,7 +92,22 @@
 		<input bind:value={textSizes[focusedText]} type="range" min="10" max="250" class="range" />
 	{/if}
 	{#if focusedImg != undefined}
-		<input bind:value={imgSizes[focusedImg]} type="range" min="10" max="250" class="range" />
+		<input
+			bind:value={imgSizes[focusedImg]}
+			type="range"
+			min="10"
+			max="250"
+			class="range range-secondary"
+		/>
+	{/if}
+	{#if focusedOrnament != undefined}
+		<input
+			bind:value={ornamentSizes[focusedOrnament]}
+			type="range"
+			min="10"
+			max="250"
+			class="range range-primary"
+		/>
 	{/if}
 </div>
 <!-- dashboard -->
@@ -103,3 +140,11 @@
 		{/each}
 	</div>
 </section>
+
+<style>
+	.canvas-bg {
+		background-image: radial-gradient(#b2ccd6 1px, transparent 0px);
+		background-size: 40px 40px;
+		mask-image: radial-gradient(ellipse at center, rgba(0, 0, 0, 1), transparent 75%);
+	}
+</style>
