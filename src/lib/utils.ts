@@ -94,8 +94,29 @@ const MAX_LOAD = 100; // maximum weight the sleigh can support
 export function autoLoadBalance(presents: Present[]): GroupBalance[] {
 	let groups: GroupBalance[] = [];
 
-	// fill groups optimally?
-	// there's only weight, no value involved
+	let cumWeight = 0;
+	let cumIndex = 0;
+	let lastIndex = 0;
+
+	for (let i = 0; i < presents.length; i++) {
+		const p = presents[i];
+
+		cumWeight += p.weight;
+		cumIndex += 1;
+
+		if (cumWeight > MAX_LOAD) {
+			cumIndex = i - 1;
+			cumWeight -= p.weight;
+			groups.push({
+				presents: presents.slice(lastIndex, cumIndex),
+				avgWeight: cumWeight / (cumIndex - lastIndex),
+				totalWeight: cumWeight
+			});
+
+			lastIndex = i;
+			cumWeight = 0;
+		}
+	}
 
 	return groups;
 }
