@@ -26,3 +26,15 @@ export interface NamesList {
 	firstNames: string[];
 	lastNames: string[];
 }
+
+export interface Present {
+	name: string;
+	weight: number;
+}
+
+export type ResponseData = Present[];
+
+export interface GroupBalance {
+	nPresents: number;
+	totalWeight: number;
+}

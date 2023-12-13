@@ -12,17 +12,17 @@
 	<div class="text-center font-normal">ADVENT OF CODE 2023</div></Heading
 >
 
-<p class="text-2xl">
+<p class="text-2xl mb-10">
 	Compilation of the <a href="https://advent.sveltesociety.dev/#challenges" class="underline"
 		>different exercises</a
 	> for this year's edition.
 </p>
 
-<section class="my-10">
+<section class="my-5">
 	<div class="divider">
 		<div style="font-family: Fern Ornaments;" class="text-2xl text-secondary">IFP</div>
 	</div>
-	<ol class="list-decimal list-inside space-y-2 grid grid-cols-2 items-baseline">
+	<ol class="list-decimal list-inside space-y-2 grid grid-cols-1 md:grid-cols-2 items-baseline">
 		<DayLink link="/day1" title="Tally Dashboard" />
 		<DayLink link="/day2" title="Cookie Counter" />
 		<DayLink link="/day3" title="Sleigh Load Balancer™" />
@@ -35,9 +35,10 @@
 		<DayLink link="/day10" title="Holiday Greeting Pop-Up" />
 		<DayLink link="/day11" title="Elf Name Generator" />
 		<DayLink link="/day12" title="Christmas Card Editor" />
+		<DayLink link="/day13" title="Auto Sleigh Load Balancer™" />
 	</ol>
 
-	<div class="divider">
+	<div class="divider mt-7">
 		<div style="font-family: Fern Ornaments;" class="text-center text-2xl text-secondary">IGP</div>
 	</div>
 </section>

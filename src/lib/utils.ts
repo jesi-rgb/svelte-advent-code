@@ -1,3 +1,5 @@
+import type { GroupBalance, Present } from '$lib/index';
+
 export const groupBy = (x, f) => x.reduce((a, b, i) => ((a[f(b, i, x)] ||= []).push(b), a), {});
 
 export const alphabet = '^ETIANMSURWDKGOHVF L PJBXCYZQ'.split('');
@@ -85,4 +87,15 @@ export function hashCode(text: string) {
 		hash = hash & hash; // Convert to 32bit integer
 	}
 	return Math.abs(hash);
+}
+
+const MAX_LOAD = 100; // maximum weight the sleigh can support
+
+export function autoLoadBalance(presents: Present[]): GroupBalance[] {
+	let groups: GroupBalance[] = [];
+
+	// fill groups optimally?
+	// there's only weight, no value involved
+
+	return groups;
 }
