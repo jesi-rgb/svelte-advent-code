@@ -24,18 +24,27 @@
 <p>Just a good old optimization problem in a festive custome.</p>
 
 <main class="my-10">
-	<div class="grid grid-cols-1 md:grid-cols-4 gap-2">
-		<!-- {#each groups as group, i} -->
-		<!-- 	<ol class="bg-base-200 p-3"> -->
-		<!-- 		<div class="font-bold mb-1">Group {i + 1}</div> -->
-		<!-- 		{#each group.presents as p} -->
-		<!-- 			<div class="flex justify-between"> -->
-		<!-- 				<li>{p.name}</li> -->
-		<!-- 				<li>{p.weight}</li> -->
-		<!-- 			</div> -->
-		<!-- 		{/each} -->
-		<!-- 	</ol> -->
-		<!-- {/each} -->
+	<div class="xl:hidden grid grid-cols-1 md:grid-cols-4 gap-2">
+		<p>Try seeing this on your computer for a nice d3 viz!</p>
+		{#each groups.slice(0, 10) as group, i}
+			<ol class="bg-base-200 p-3">
+				<div class="flex justify-between items-baseline">
+					<div class="font-bold text-3xl mb-1">Group {i + 1}</div>
+					<div class="font-bold text-3xl mb-1 opacity-60">{group.weight.toFixed(1)} kg</div>
+				</div>
+				{#each group.children as p}
+					<div class="flex justify-between">
+						<li>{p.name}</li>
+						<li>{p.weight}</li>
+					</div>
+				{/each}
+			</ol>
+		{/each}
+		<p class="italic">
+			there's {groups.length - 10} more groups but you probably don't want to see them
+		</p>
 	</div>
-	<CirclePack data={groups} />
+	<div class="hidden xl:block">
+		<CirclePack data={groups} />
+	</div>
 </main>
