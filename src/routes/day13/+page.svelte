@@ -25,16 +25,17 @@
 
 <main class="my-10">
 	<div class="grid grid-cols-1 md:grid-cols-4 gap-2">
-		{#each groups as group, i}
-			<ol class="bg-base-200 p-3">
-				<div class="font-bold mb-1">Group {i + 1}</div>
-				{#each group.presents as p}
-					<div class="flex justify-between">
-						<li>{p.name}</li>
-						<li>{p.weight}</li>
-					</div>
-				{/each}
-			</ol>
-		{/each}
+		<!-- {#each groups as group, i} -->
+		<!-- 	<ol class="bg-base-200 p-3"> -->
+		<!-- 		<div class="font-bold mb-1">Group {i + 1}</div> -->
+		<!-- 		{#each group.presents as p} -->
+		<!-- 			<div class="flex justify-between"> -->
+		<!-- 				<li>{p.name}</li> -->
+		<!-- 				<li>{p.weight}</li> -->
+		<!-- 			</div> -->
+		<!-- 		{/each} -->
+		<!-- 	</ol> -->
+		<!-- {/each} -->
 	</div>
+	<CirclePack data={groups} />
 </main>

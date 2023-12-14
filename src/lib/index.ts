@@ -35,7 +35,8 @@ export interface Present {
 export type ResponseData = Present[];
 
 export interface GroupBalance {
-	totalWeight: number;
+	weight: number;
 	avgWeight: number;
-	presents: Present[];
+	children: Present[];
+	name: string;
 }

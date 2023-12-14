@@ -1,78 +1,186 @@
 <script>
-	import { stratify, pack, hierarchy } from 'd3-hierarchy';
-
-	let width = 400,
-		height = 600;
+	// from https://svend3r.dev/charts/circlePack
+	import {
+		hierarchy,
+		interpolateHcl,
+		scaleOrdinal,
+		interpolateZoom,
+		pack,
+		scaleLinear,
+		transition
+	} from 'd3';
 
 	export let data;
 
-	/** @type {String} [idKey='id'] - The key on each object where the id value lives. */
-	export let idKey = 'id';
+	let width = 800; //the outer width of the chart, in pixels
+	const height = width; // the outer height of the chart, in pixels
+	const margin = 20; //the overall margin between the circle packs to the viewport edge
+	const backgroundColor = 'transparent'; // the background color of the chart
+	const fontSize = 10; //the font size of the text labels
 
-	/** @type {String} [parentKey] - Set this if you want to define one parent circle. This will give you a [nested](https://layercake.graphics/example/CirclePackNested) graphic versus a [grouping of circles](https://layercake.graphics/example/CirclePack). */
-	export let parentKey = undefined;
+	const color = scaleOrdinal().domain([2, 1, 0]).range(['#FF7D5C', '#B2CCD6', '#20252E']);
 
-	/** @type {String} [valueKey='value'] - The key on each object where the data value lives. */
-	export let valueKey = 'avgWeight';
+	const packFunc = (pData) =>
+		pack()
+			.size([width - margin, height - margin])
+			.padding(3)(
+			hierarchy({ children: pData })
+				.sum((d) => d.weight)
+				.sort((a, b) => b.weight - a.weight)
+		);
 
-	/** @type {Function} [labelVisibilityThreshold=r => r > 25] - By default, only show the text inside a circle if its radius exceeds a certain size. Provide your own function for different behavior. */
-	export let labelVisibilityThreshold = (r) => r > 10;
+	const root = packFunc(data);
+	let activeFocus = root;
+	let view;
+	let activeZoomK = (width / root.r) * 2;
+	let activeZoomA = root.x;
+	let activeZoomB = root.y;
 
-	/** @type {Function} [sortBy=(a, b) => b.value - a.value] - The order in which circle's are drawn. Sorting on the `depth` key is also a popular choice. */
-	export let sortBy = (a, b) => b.value - a.value; // 'depth' is also a popular choice
+	const inactiveZoomTo = (v) => {
+		activeZoomK = width / v[2];
+		view = v;
+		activeZoomA = v[0];
+		activeZoomB = v[1];
+	};
 
-	/** @type {Number} [spacing=0] - Whitespace padding between each circle, in pixels. */
-	export let spacing = 3;
+	inactiveZoomTo([root.x, root.y, root.r * 2 + margin]);
 
-	/* --------------------------------------------
-	 * This component will automatically group your data
-	 * into one group if no `parentKey` was passed in.
-	 * Stash $data here so we can add our own parent
-	 * if there's no `parentKey`
-	 */
-	let parent = {};
+	const zoom = (d, e) => {
+		e.stopPropagation();
+		const activeFocus0 = activeFocus;
 
-	let dataset = data;
-	console.log(dataset);
+		activeFocus = d;
 
-	$: if (parentKey === undefined) {
-		parent = { [idKey]: 'all' };
-		dataset = [...dataset, parent];
-	}
-
-	$: stratifier = stratify()
-		.id((d) => d[idKey])
-		.parentId((d) => {
-			if (d[idKey] === parent[idKey]) return '';
-			return d[parentKey] || parent[idKey];
-		});
-
-	$: packer = pack().size([width, height]).padding(spacing);
-
-	$: stratified = stratifier(dataset);
-
-	$: root = hierarchy(stratified)
-		.sum((d, i) => {
-			return d.data[valueKey] || 1;
-		})
-		.sort(sortBy);
-
-	$: packed = packer(root);
-
-	$: descendants = packed.descendants();
-	$: console.log(descendants);
+		transition()
+			.duration(750)
+			.tween('zoom', () => {
+				var i = interpolateZoom(view, [activeFocus.x, activeFocus.y, activeFocus.r * 2 + margin]);
+				return function (t) {
+					inactiveZoomTo(i(t));
+				};
+			});
+	};
+	$: console.log(root.descendants());
 </script>
 
 <div bind:clientWidth={width}>
-	<svg {width} {height} class="bg-base-200 border-2 border-dashed rounded-xl">
-		<g>
-			{#each descendants as d, i}
-				{#if i == 0}
-					<circle cx={d.x} cy={d.y} r={d.r} class="stroke-base-content" />
-				{:else}
-					<circle cx={d.x} cy={d.y} r={d.r} class="fill-base-content tooltip"></circle>
+	<svg
+		{width}
+		{height}
+		style="background: {backgroundColor};"
+		class="w-full bg-base-200 border-dashed border-2 rounded-xl"
+		on:click={(e) => zoom(root, e)}
+	>
+		<g transform="translate({width / 2},{height / 2})">
+			{#each root.descendants() as rootDes}
+				{#if rootDes.height > 0}
+					<circle
+						class={rootDes.parent
+							? rootDes.children
+								? 'node'
+								: 'node node--leaf'
+							: 'node node--root'}
+						fill={color(rootDes.depth)}
+						on:click={(e) => {
+							if (activeFocus !== rootDes) zoom(rootDes, e);
+						}}
+						transform="translate({(rootDes.x - activeZoomA) * activeZoomK},{(rootDes.y -
+							activeZoomB) *
+							activeZoomK})"
+						r={rootDes.r * activeZoomK}
+					></circle>
+				{/if}
+
+				{#if rootDes.parent === activeFocus}
+					{#if activeZoomK > 10}
+						{#if rootDes.height == 0}
+							<circle
+								class={rootDes.parent
+									? rootDes.children
+										? 'node'
+										: 'node node--leaf'
+									: 'node node--root'}
+								fill={color(rootDes.depth)}
+								on:click={(e) => {
+									if (activeFocus !== rootDes) zoom(rootDes, e);
+								}}
+								transform="translate({(rootDes.x - activeZoomA) * activeZoomK},{(rootDes.y -
+									activeZoomB) *
+									activeZoomK})"
+								r={rootDes.r * activeZoomK}
+							></circle>
+						{/if}
+						<text
+							font-size="9px"
+							text-anchor="middle"
+							class="pointer-events-none"
+							dy="-5"
+							transform="translate({(rootDes.x - activeZoomA) * activeZoomK},{(rootDes.y -
+								activeZoomB) *
+								activeZoomK})"
+							>{rootDes.data.name}
+						</text>
+					{/if}
+
+					{#if activeZoomK < 2}
+						<text
+							dy={rootDes.parent === activeFocus ? '0' : '9'}
+							class="pointer-events-none"
+							text-anchor="middle"
+							font-size={rootDes.parent === activeFocus ? '14px' : '9px'}
+							fill-opacity={rootDes.parent === activeFocus ? 1 : 0}
+							transform="translate({(rootDes.x - activeZoomA) * activeZoomK},{(rootDes.y -
+								activeZoomB) *
+								activeZoomK})">{rootDes.data.name}</text
+						>
+					{:else}
+						<text
+							dy="9"
+							class="pointer-events-none"
+							text-anchor="middle"
+							font-size={rootDes.parent === activeFocus ? '14px' : '9px'}
+							transform="translate({(rootDes.x - activeZoomA) * activeZoomK},{(rootDes.y -
+								activeZoomB) *
+								activeZoomK})">{parseFloat(rootDes.data.weight).toFixed(1)} kg</text
+						>
+
+						{#if rootDes.depth == 2}
+							<text
+								class="pointer-events-none font-bold text-center fill-white stroke-base-300 stroke-2"
+								text-anchor="middle"
+								dy="-230"
+								opacity=".1"
+								font-size="80px"
+								transform="translate({(rootDes.parent.x - activeZoomA) * activeZoomK},{(rootDes
+									.parent.y -
+									activeZoomB) *
+									activeZoomK})">{parseFloat(rootDes.parent.data.weight).toFixed(1)} kg</text
+							>
+						{/if}
+					{/if}
 				{/if}
 			{/each}
 		</g>
 	</svg>
 </div>
+
+<style>
+	.node {
+		cursor: pointer;
+	}
+
+	.node:hover {
+		stroke: #000;
+		stroke-width: 1.5px;
+	}
+
+	.node--leaf {
+		fill: white;
+	}
+
+	.label,
+	.node--root,
+	.node--leaf {
+		pointer-events: none;
+	}
+</style>

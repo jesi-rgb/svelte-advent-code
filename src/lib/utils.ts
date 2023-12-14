@@ -108,9 +108,10 @@ export function autoLoadBalance(presents: Present[]): GroupBalance[] {
 			cumIndex = i - 1;
 			cumWeight -= p.weight;
 			groups.push({
-				presents: presents.slice(lastIndex, cumIndex),
+				children: presents.slice(lastIndex, cumIndex),
 				avgWeight: cumWeight / (cumIndex - lastIndex),
-				totalWeight: cumWeight
+				weight: cumWeight,
+				name: `${groups.length + 1}`
 			});
 
 			lastIndex = i;
