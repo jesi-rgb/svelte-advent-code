@@ -101,21 +101,20 @@ export function autoLoadBalance(presents: Present[]): GroupBalance[] {
 	for (let i = 0; i < presents.length; i++) {
 		const p = presents[i];
 
-		cumWeight += p.weight;
 		cumIndex += 1;
 
-		if (cumWeight > MAX_LOAD) {
-			cumIndex = i - 1;
-			cumWeight -= p.weight;
+		if (cumWeight + p.weight > MAX_LOAD) {
 			groups.push({
 				children: presents.slice(lastIndex, cumIndex),
-				avgWeight: cumWeight / (cumIndex - lastIndex),
+				avgWeight: cumWeight / (cumIndex - 1 - lastIndex),
 				weight: cumWeight,
 				name: `${groups.length + 1}`
 			});
 
-			lastIndex = i;
+			lastIndex = cumIndex - 1;
 			cumWeight = 0;
+		} else {
+			cumWeight += p.weight;
 		}
 	}
 
