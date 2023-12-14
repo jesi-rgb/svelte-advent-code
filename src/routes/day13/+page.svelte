@@ -24,7 +24,7 @@
 <p>Just a good old optimization problem in a festive custome.</p>
 
 <main class="my-10">
-	<div class="xl:hidden grid grid-cols-1 md:grid-cols-4 gap-2">
+	<div class="xl:hidden grid grid-cols-1 md:grid-cols-2 gap-2">
 		<p>Try seeing this on your computer for a nice d3 viz!</p>
 		{#each groups.slice(0, 10) as group, i}
 			<ol class="bg-base-200 p-3">
