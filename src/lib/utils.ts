@@ -120,3 +120,7 @@ export function autoLoadBalance(presents: Present[]): GroupBalance[] {
 
 	return groups;
 }
+
+export function uniform(min, max): number {
+	return min + Math.random() * (max - min);
+}

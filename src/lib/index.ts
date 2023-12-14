@@ -40,3 +40,11 @@ export interface GroupBalance {
 	children: Present[];
 	name: string;
 }
+
+export interface Particle {
+	x: number;
+	y: number;
+	dx: number;
+	dy: number;
+	size: number;
+}

@@ -6,7 +6,6 @@
 
 	import { autoLoadBalance } from '$lib/utils.js';
 	import CirclePack from '$lib/Components/CirclePack.svelte';
-	import CirclePackZoom from '$lib/Components/CirclePackZoom.svelte';
 
 	let width = 300,
 		height = 400;
