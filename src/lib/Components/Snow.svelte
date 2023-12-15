@@ -60,10 +60,7 @@
 	});
 </script>
 
-<svg
-	bind:this={svg}
-	class="w-screen pointer-events-none h-screen absolute top-0 right-0 border border-dashed"
->
+<svg bind:this={svg} class="w-screen pointer-events-none h-screen absolute top-0 right-0">
 	{#each particles as p (p)}
 		<circle cx={p.x} cy={p.y} r={p.size} class="fill-base-content"></circle>
 	{/each}
