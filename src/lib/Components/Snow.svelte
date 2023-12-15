@@ -5,8 +5,11 @@
 	import { onMount } from 'svelte';
 
 	let svg: SVGElement;
-	let rate = 1; // every rate frames add a snowflake
-	let size = 3;
+	export let rate = 3;
+	export let size = 3;
+	export let wind = 2;
+	export let weight = 3;
+
 	let particles: Particle[] = [];
 
 	let frameHandle: number;
@@ -22,17 +25,17 @@
 
 		frameCount += 1;
 
-		console.log(frameCount % rate, particles.length);
 		let rect = svg.getBoundingClientRect();
-		if (frameCount % rate == 0) {
+		let count = (rate * uniform(0, 2) * delta) / 1000;
+		for (let i = 0; i < count; i++) {
 			particles.push({
 				x: uniform(-rect.left, rect.right),
 				y: -1,
-				dx: uniform(-10, 10),
-				dy: uniform(10, 200),
+				dx: uniform(-10, 10) * wind,
+
+				dy: uniform(10, 200) * weight,
 				size: Math.random() * size
 			});
-			console.log('addd');
 		}
 
 		for (let i = 0; i < particles.length; i++) {
@@ -41,9 +44,8 @@
 			p.x += (p.dx * delta) / 1000;
 			p.y += (p.dy * delta) / 1000;
 
-			if (p.y < -2 || p.y > rect.height + 1 || p.x < 0 || p.x > rect.width) {
+			if (p.y > rect.height + 1 || p.x < 0 || p.x > rect.width) {
 				particles.splice(i--, 1);
-				console.log('removed');
 			}
 
 			particles = particles;
