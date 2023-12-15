@@ -5,28 +5,34 @@
 	import { onMount } from 'svelte';
 
 	let svg: SVGElement;
-	let rate = 4;
+	let rate = 1; // every rate frames add a snowflake
 	let size = 3;
 	let particles: Particle[] = [];
 
 	let frameHandle: number;
 	let lastUpdate: number;
+	let frameCount = 0;
 
 	function loop() {
+		frameHandle = requestAnimationFrame(loop);
+
 		const now = Date.now();
 		const delta = now - lastUpdate;
 		lastUpdate = now;
 
+		frameCount += 1;
+
+		console.log(frameCount % rate, particles.length);
 		let rect = svg.getBoundingClientRect();
-		const count = 1;
-		for (let i = 0; i < count; i++) {
+		if (frameCount % rate == 0) {
 			particles.push({
 				x: uniform(-rect.left, rect.right),
 				y: -1,
-				dx: uniform(-1, 1),
-				dy: uniform(1, 2),
+				dx: uniform(-10, 10),
+				dy: uniform(10, 200),
 				size: Math.random() * size
 			});
+			console.log('addd');
 		}
 
 		for (let i = 0; i < particles.length; i++) {
@@ -35,18 +41,12 @@
 			p.x += (p.dx * delta) / 1000;
 			p.y += (p.dy * delta) / 1000;
 
-			if (
-				p.y < -rect.height ||
-				p.y > rect.height + 1 ||
-				p.x < -rect.width ||
-				p.x > rect.width * 2
-			) {
+			if (p.y < -2 || p.y > rect.height + 1 || p.x < 0 || p.x > rect.width) {
 				particles.splice(i--, 1);
+				console.log('removed');
 			}
 
 			particles = particles;
-
-			frameHandle = requestAnimationFrame(loop);
 		}
 	}
 
