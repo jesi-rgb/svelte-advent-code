@@ -48,7 +48,12 @@
 <div class="opacity-70 my-10">
 	<p>Some of the (auto-imposed rules) I want to follow:</p>
 	<ol class="list-decimal list-inside">
-		<li>You can <em>only</em> work on a prompt on its given day.</li>
+		<li>
+			You can <em>only</em> work on a prompt on its given day.
+			<ol class="list-decimal list-inside ml-4 opacity-60 italic">
+				<li>due to reasons beyond my control, this was not possible on some ambitious days</li>
+			</ol>
+		</li>
 		<li>Use as few tools as you can. As barebones as possible.</li>
 		<li>Reinvent the wheel, only if it's fun to do so.</li>
 		<li>Develop a consistent style all accross the project.</li>
