@@ -76,14 +76,14 @@
 	>
 		<div class="relative w-full h-full rounded-full mask mask-circle">
 			<div
-				class="text-3xl md:text-4xl w-full z-10 balance font-bold text-center stroke-base-100 stroke-2 absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2"
+				class="text-3xl md:text-4xl w-full drop-shadow-lg z-10 balance font-bold text-center stroke-base-100 stroke-2 absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2"
 			>
 				Happy Svelte Advent of Code!
 			</div>
-			<Snow fullScreen={false} />
+			<Snow fullScreen={false} weight={0.31} rate={0.4} wind={2.3} />
 
 			<div
-				class="absolute pattern mx-auto my-auto h-fit -top-5"
+				class="absolute pattern mx-auto my-auto h-fit -top-5 -z-10"
 				style="font-family: Fern Ornaments;"
 			>
 				<div class="text-3xl md:text-4xl">
