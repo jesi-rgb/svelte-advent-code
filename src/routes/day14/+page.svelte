@@ -12,9 +12,11 @@
 <BackButton />
 <Heading>Snow Simulator</Heading>
 
+<p>Let it snow! Now with adjustable parameters for maximum convenience.</p>
+
 <Snow {size} {rate} {wind} {weight} />
 
-<main>
+<main class="my-10">
 	<label for="size">
 		<span>size</span>
 		<input id="size" bind:value={size} type="range" min="0.01" max="6" step="0.01" class="range" />

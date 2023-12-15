@@ -9,6 +9,7 @@
 	export let size = 3;
 	export let wind = 2;
 	export let weight = 3;
+	export let fullScreen = true;
 
 	let particles: Particle[] = [];
 
@@ -60,8 +61,23 @@
 	});
 </script>
 
-<svg bind:this={svg} class="w-screen pointer-events-none h-screen absolute top-0 right-0">
+<svg
+	bind:this={svg}
+	class:fullScreen
+	class="absolute bg-opacity-0 pointer-events-none w-full h-full"
+>
 	{#each particles as p (p)}
 		<circle cx={p.x} cy={p.y} r={p.size} class="fill-base-content"></circle>
 	{/each}
 </svg>
+
+<style>
+	.fullScreen {
+		width: 100vw;
+		height: 100vw;
+		position: absolute;
+		left: 0;
+		right: 0;
+		top: 0;
+	}
+</style>
