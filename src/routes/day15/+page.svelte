@@ -16,12 +16,48 @@
 		'QETRQETRQE',
 		'ZCGFZCGFZC'
 	];
+	let acceleration;
 
 	const patternLength = pattern[0].length * pattern.length;
 	let animationInterval: number;
 	let animationInterval2: number;
 	let spans: HTMLElement[] = [];
-	// let randomSpan: HTMLElement;
+
+	let accelerometerData = { x: 0, y: 0, z: 0 };
+	let error = '';
+
+	async function initializeAccelerometer() {
+		// Check if the Accelerometer API is available
+		if ('Accelerometer' in window) {
+			try {
+				// Check for permissions (optional)
+				const permission = await navigator.permissions.query({ name: 'accelerometer' });
+				if (permission.state === 'granted') {
+					const accelerometer = new Accelerometer({ frequency: 60 });
+
+					accelerometer.addEventListener('reading', () => {
+						accelerometerData = {
+							x: accelerometer.x,
+							y: accelerometer.y,
+							z: accelerometer.z
+						};
+					});
+
+					accelerometer.addEventListener('error', (event) => {
+						error = `Accelerometer error: ${event.error.name}`;
+					});
+
+					accelerometer.start();
+				} else {
+					error = 'Accelerometer permission not granted.';
+				}
+			} catch (e) {
+				error = `Error initializing accelerometer: ${e.message}`;
+			}
+		} else {
+			error = 'Accelerometer API not available.';
+		}
+	}
 
 	function startAnimation(delay: number = 1000) {
 		// set an interval to change opacity every second
@@ -58,7 +94,10 @@
 		startAnimation(800);
 		startAnimation(1000);
 		startAnimation(1300);
+
+		initializeAccelerometer();
 	});
+
 	onDestroy(() => {
 		clearInterval(animationInterval);
 		clearInterval(animationInterval2);
@@ -69,6 +108,7 @@
 <Heading>Snow Globe</Heading>
 
 <p>Cybernetically enhanced Snow Globes</p>
+<p>{accelerometerData.x}</p>
 
 <main class="my-10">
 	<div
