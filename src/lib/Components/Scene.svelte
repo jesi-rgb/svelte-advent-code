@@ -2,7 +2,7 @@
 	import { T } from '@threlte/core';
 	import { Grid, OrbitControls } from '@threlte/extras';
 	import Present from './Present.svelte';
-	import { scaleLinear, scaleBand } from 'd3-scale';
+	import { scaleLinear } from 'd3-scale';
 	import { extent } from 'd3-array';
 	import type { Present3D } from '$lib/index';
 
@@ -55,5 +55,5 @@
 			ref.maxZoom = 250;
 			ref.minZoom = 140;
 		}}
-	></OrbitControls></T.OrthographicCamera
->
+	/>
+</T.OrthographicCamera>
