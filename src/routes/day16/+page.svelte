@@ -14,13 +14,16 @@
 <BackButton />
 <Heading>Santa's Hangar</Heading>
 
-<p>This is where all the presents are located. Sounds good huh?</p>
+<p>
+	This is the place where all the presents are located. Presents that share the same location
+	stacked up in different floors. Search for a kid's name to find where their present is!
+</p>
 
 <Canvas {presents3D} />
 
 <Select
 	class="selected"
-	placeholder="Search for a kid"
+	placeholder="Search for a kid's present"
 	bind:value={$search}
 	items={presents3D.map((p) => p.name)}
 	--placeholder-color="#B2CCD6"

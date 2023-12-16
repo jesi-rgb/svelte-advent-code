@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { T } from '@threlte/core';
-	import { Grid, OrbitControls } from '@threlte/extras';
+	import { Grid, OrbitControls, Text } from '@threlte/extras';
 	import Present from './Present.svelte';
 	import { scaleLinear } from 'd3-scale';
 	import { extent } from 'd3-array';
@@ -54,10 +54,10 @@
 <T.OrthographicCamera makeDefault zoom={140} position={[5, 6, 5]}>
 	<OrbitControls
 		on:create={({ ref }) => {
-			ref.minPolarAngle = Math.PI / 4 - 0.3;
+			ref.minPolarAngle = Math.PI / 4 - 0.9;
 			ref.maxPolarAngle = Math.PI / 4 + 0.3;
-			ref.maxZoom = 250;
-			ref.minZoom = 140;
+			ref.maxZoom = 390;
+			ref.minZoom = 100;
 		}}
 	/>
 </T.OrthographicCamera>
