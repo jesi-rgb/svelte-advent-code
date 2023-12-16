@@ -8,18 +8,22 @@
 
 	export let presents3D: Present3D[];
 
-	let presentScale = 0.1;
 	$: xScale = scaleLinear().domain([1, 20]).range([-1, 1]);
 	$: yScale = scaleLinear().domain([1, 20]).range([-1, 1]);
 
-	const maxHeight = extent(presents3D.map((p) => p.z));
 	$: zScale = scaleLinear()
 		.domain(extent(presents3D.map((p) => p.z)))
 		.range([0, 0.65]);
 </script>
 
 {#each presents3D as p}
-	<Present name={p.name} x={xScale(p.x)} z={yScale(p.y)} y={zScale(p.z)} />
+	<Present
+		name={p.name}
+		pos={`${p.x},${p.y},${p.z}`}
+		x={xScale(p.x)}
+		z={yScale(p.y)}
+		y={zScale(p.z)}
+	/>
 {/each}
 
 <Grid cellColor="#B2CCD6" sectionColor="#B2CCD6" />
