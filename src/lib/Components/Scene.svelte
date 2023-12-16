@@ -19,7 +19,7 @@
 </script>
 
 {#each presents3D as p}
-	<Present x={xScale(p.x)} z={yScale(p.y)} y={zScale(p.z)} />
+	<Present name={p.name} x={xScale(p.x)} z={yScale(p.y)} y={zScale(p.z)} />
 {/each}
 
 <Grid cellColor="#B2CCD6" sectionColor="#B2CCD6" />
@@ -47,13 +47,13 @@
 	}}
 />
 
-<T.OrthographicCamera
-	makeDefault
-	zoom={150}
-	position={[5, 6, 5]}
-	on:create={({ ref }) => {
-		ref.lookAt(0, 0.3, 0);
-	}}
->
-	<OrbitControls></OrbitControls></T.OrthographicCamera
+<T.OrthographicCamera makeDefault zoom={140} position={[5, 6, 5]}>
+	<OrbitControls
+		on:create={({ ref }) => {
+			ref.minPolarAngle = Math.PI / 4 - 0.3;
+			ref.maxPolarAngle = Math.PI / 4 + 0.3;
+			ref.maxZoom = 250;
+			ref.minZoom = 140;
+		}}
+	></OrbitControls></T.OrthographicCamera
 >

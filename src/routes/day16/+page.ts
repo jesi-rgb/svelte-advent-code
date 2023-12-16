@@ -9,7 +9,7 @@ export async function load({ fetch }) {
 		let currSlot = `${p.x},${p.y}`;
 
 		if (slots[currSlot] != undefined) {
-			presents3D.push({ x: p.x, y: p.y, z: slots[currSlot] });
+			presents3D.push({ name: p.name, x: p.x, y: p.y, z: slots[currSlot] });
 			slots[currSlot] = slots[currSlot] + 1;
 		} else {
 			slots[currSlot] = 0;
