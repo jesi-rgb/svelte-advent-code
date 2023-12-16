@@ -116,7 +116,7 @@
 	>
 		<div class="relative w-full h-full rounded-full mask mask-circle">
 			<div
-				class="text-3xl md:text-4xl w-full drop-shadow-lg z-10 balance font-bold text-center stroke-base-100 stroke-2 absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2"
+				class="text-outline text-3xl md:text-4xl w-full drop-shadow-lg z-10 balance font-bold text-center stroke-base-100 stroke-2 absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2"
 			>
 				Happy Svelte Advent of Code!
 			</div>
@@ -150,5 +150,8 @@
 	}
 	.balance {
 		text-wrap: balance;
+	}
+	.text-outline {
+		-webkit-text-stroke: 0.9px #2a303c;
 	}
 </style>

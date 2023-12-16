@@ -48,3 +48,9 @@ export interface Particle {
 	dy: number;
 	size: number;
 }
+
+export interface Present3D {
+	name: string;
+	x: number; // 1-20
+	y: number; // 1-20
+}
