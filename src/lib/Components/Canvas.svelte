@@ -12,7 +12,7 @@
 		<Scene {presents3D} />
 	</Canvas>
 
-	{#if $searchData != undefined && $searchData.value !== undefined}
+	{#if $searchData.pos != undefined}
 		<div class="p-4 bg-base-100 backdrop-blur-sm absolute left-4 bottom-2 drop-shadow-md text-lg">
 			<p class="font-bold">
 				{$searchData.name}
