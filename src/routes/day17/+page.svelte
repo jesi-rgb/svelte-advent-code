@@ -28,7 +28,12 @@
 	$: sum = items.map((p) => p.price).reduce((a, b) => a + b, 0);
 	$: percentageSpent.set((sum / budget) * 100);
 
+	$: console.log($percentageSpent);
 	$: budgetLeft = 100 - $percentageSpent;
+
+	$: if (budgetLeft > 69) {
+		color.set(colors[0]);
+	}
 	$: if (budgetLeft < 70) {
 		color.set(colors[1]);
 	}
@@ -92,7 +97,7 @@
 	>
 		<rect x="0" y="0" height="100px" width="{$percentageSpent}%" fill={$color} />
 	</svg>
-	<p class="mb-10 mt-2 text-xl">Total Spent: {sum} out of {budget}</p>
+	<p class="mb-10 mt-2 text-xl">Total Spent: {sum} out of {budget}§</p>
 
 	<h2 class="text-2xl font-bold mb-2">Present list</h2>
 	<ol
