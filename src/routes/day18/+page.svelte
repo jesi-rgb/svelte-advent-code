@@ -7,6 +7,10 @@
 
 	const questions = data.questions;
 
+	questions.map((q) => {
+		shuffle(q.answers);
+	});
+
 	let answers: HTMLElement[] = [];
 	let userAnswers: boolean[] = [];
 	// from https://stackoverflow.com/questions/42317140/count-the-number-of-true-members-in-an-array-of-boolean-values
@@ -30,7 +34,7 @@
 					{q.question}
 				</div>
 				<ol class="list-decimal list-inside tabular-nums text-xl">
-					{#each shuffle(q.answers) as a, ia}
+					{#each q.answers as a, ia}
 						<li bind:this={answers[iq * q.answers.length + ia]} class="flex items-start space-x-3">
 							<input
 								id="answer-{iq * q.answers.length + ia}"
