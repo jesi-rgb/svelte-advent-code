@@ -41,6 +41,7 @@
 		<DayLink link="/day16" title="Santa's Hangar" />
 		<DayLink link="/day17" title="Festive Funds" />
 		<DayLink link="/day18" title="Santa's Quiz" />
+		<DayLink link="/day19" title="Polar Lights" />
 	</ol>
 
 	<div class="divider mt-7">
