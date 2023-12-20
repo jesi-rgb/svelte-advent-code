@@ -42,6 +42,7 @@
 		<DayLink link="/day17" title="Festive Funds" />
 		<DayLink link="/day18" title="Santa's Quiz" />
 		<DayLink link="/day19" title="Polar Lights" />
+		<DayLink link="/day20" title="Cracker Jokes" />
 	</ol>
 
 	<div class="divider mt-7">
