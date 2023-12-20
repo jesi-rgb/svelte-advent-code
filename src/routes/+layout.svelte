@@ -3,7 +3,9 @@
 </script>
 
 <div class="overflow-x-clip">
-	<main class="my-10 md:my-20 max-w-xs md:max-w-2xl xl:max-w-3xl mx-auto text-lg">
+	<main
+		class="my-10 md:my-20 max-w-xs md:max-w-2xl xl:max-w-3xl mx-auto text-lg selection:text-base-100 selection:bg-primary"
+	>
 		<slot />
 	</main>
 </div>
