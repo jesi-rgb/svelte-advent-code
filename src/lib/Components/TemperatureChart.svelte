@@ -16,7 +16,7 @@
 		lineData.push({
 			temperature: temps[i],
 			time: times[i],
-			apparent_temperature: temps[i] - apparents[i]
+			apparent_temperature: apparents[i]
 		});
 	}
 
@@ -28,7 +28,7 @@
 	let marginLeft = 30;
 
 	$: y = scaleLinear()
-		.domain(extent(temps))
+		.domain(extent(lineData, (d) => d.apparent_temperature))
 		.range([height - marginBottom, marginTop])
 		.nice();
 
@@ -104,9 +104,34 @@
 				</text>
 			{/each}
 
-			<path in:draw fill="none" class="stroke-primary" stroke-width="3" d={temp(lineData)}></path>
-			<path in:draw fill="none" class="stroke-secondary" stroke-width="3" d={apparent(lineData)}
+			<path
+				in:draw
+				fill="none"
+				stroke-linejoin="round"
+				stroke-linecap="round"
+				class="stroke-primary"
+				stroke-width="3"
+				d={temp(lineData)}
+			></path>
+			<path
+				in:draw
+				fill="none"
+				class="stroke-secondary"
+				stroke-linejoin="round"
+				stroke-linecap="round"
+				stroke-width="3"
+				d={apparent(lineData)}
 			></path>
 		</g></svg
 	>
+	<div class="ml-3">
+		<div class="flex items-center space-x-3">
+			<div class="w-3 h-3 bg-primary rounded-sm"></div>
+			<div>Actual Temperature in ºC</div>
+		</div>
+		<div class="flex items-center space-x-3">
+			<div class="w-3 h-3 rounded-sm bg-secondary"></div>
+			<div>Perceived Temperature in ºC</div>
+		</div>
+	</div>
 </div>

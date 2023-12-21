@@ -4,6 +4,8 @@
 	import { onMount } from 'svelte';
 	import { scaleLinear } from 'd3-scale';
 	import TemperatureChart from '$lib/Components/TemperatureChart.svelte';
+	import RainChart from '$lib/Components/RainChart.svelte';
+	import PercentajeRainChart from '$lib/Components/PercentajeRainChart.svelte';
 
 	let latitude: number, longitude: number;
 	let loading = false;
@@ -30,7 +32,7 @@
 	async function fetchWeather(latitude, longitude) {
 		if (latitude == undefined || longitude == undefined) return;
 		let promise = await fetch(
-			`https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&hourly=temperature_2m,apparent_temperature,precipitation_probability,snowfall`
+			`https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&hourly=temperature_2m,apparent_temperature,precipitation_probability,rain&current=temperature_2m`
 		);
 		let data = await promise.json();
 
@@ -63,12 +65,32 @@
 		<p>Press the button to give permission to see where you are</p>
 		<button class="btn" on:click={getCoords}>get coords</button>
 	{:else}
-		<p>
+		<div class="text-2xl mb-3">
 			Location: {latitude}, {longitude}
-		</p>
+		</div>
 
 		{#if forecast != undefined}
-			<TemperatureChart data={forecast} />
+			<div class="flex flex-col space-y-10 my-10">
+				<div class="text-6xl font-bold md:text-right tabular-nums">
+					<span class="text-xl opacity-80">Current temperature:</span>
+					{forecast.current.temperature_2m}ºC
+				</div>
+				<div class="">
+					<h2 class="text-4xl font-bold">Temperature forecast</h2>
+					<p class="text-xl">for the next 7 days</p>
+					<TemperatureChart data={forecast} />
+				</div>
+				<div class="">
+					<h2 class="text-4xl font-bold">Precipitation forecast</h2>
+					<p class="text-xl">for the next 7 days</p>
+					<RainChart data={forecast} />
+				</div>
+				<div class="">
+					<h2 class="text-4xl font-bold">Probability of rain forecast</h2>
+					<p class="text-xl">for the next 7 days</p>
+					<PercentajeRainChart data={forecast} />
+				</div>
+			</div>
 		{/if}
 	{/if}
 </main>
