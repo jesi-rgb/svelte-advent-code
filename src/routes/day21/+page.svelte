@@ -2,6 +2,8 @@
 	import BackButton from '$lib/Components/BackButton.svelte';
 	import Heading from '$lib/Components/Heading.svelte';
 	import { onMount } from 'svelte';
+	import { scaleLinear } from 'd3-scale';
+	import TemperatureChart from '$lib/Components/TemperatureChart.svelte';
 
 	let latitude: number, longitude: number;
 	let loading = false;
@@ -20,7 +22,13 @@
 		);
 	}
 
+	onMount(() => {
+		getCoords();
+	});
+
+	let forecast;
 	async function fetchWeather(latitude, longitude) {
+		if (latitude == undefined || longitude == undefined) return;
 		let promise = await fetch(
 			`https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&hourly=temperature_2m,apparent_temperature,precipitation_probability,snowfall`
 		);
@@ -28,7 +36,7 @@
 
 		console.log(data);
 
-		return data;
+		forecast = data;
 	}
 
 	$: fetchWeather(latitude, longitude);
@@ -58,5 +66,9 @@
 		<p>
 			Location: {latitude}, {longitude}
 		</p>
+
+		{#if forecast != undefined}
+			<TemperatureChart data={forecast} />
+		{/if}
 	{/if}
 </main>
