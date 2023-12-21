@@ -43,6 +43,7 @@
 		<DayLink link="/day18" title="Santa's Quiz" />
 		<DayLink link="/day19" title="Polar Lights" />
 		<DayLink link="/day20" title="Cracker Jokes" />
+		<DayLink link="/day21" title="Frightful Weather App" />
 	</ol>
 
 	<div class="divider mt-7">
