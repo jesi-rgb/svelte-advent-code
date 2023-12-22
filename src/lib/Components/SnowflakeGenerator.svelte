@@ -14,8 +14,6 @@
 	$: for (let index = 0; index < randomVals.length; index++) {
 		randomVals[index] = Math.random() * (height / 2) * randomness;
 	}
-
-	$: console.log(randomVals);
 </script>
 
 <div bind:clientWidth={width} class="border-2 border-dashed rounded-xl my-5 bg-base-300">
