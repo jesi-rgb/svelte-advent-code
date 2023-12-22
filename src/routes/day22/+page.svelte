@@ -1,14 +1,14 @@
-<script>
+<script lang="ts">
 	import BackButton from '$lib/Components/BackButton.svelte';
 	import Heading from '$lib/Components/Heading.svelte';
 	import SnowflakeGenerator from '$lib/Components/SnowflakeGenerator.svelte';
 
 	let trees = 6;
 	let randomness = 0;
-	let stagger = 0.4;
+	let stagger = 1;
 
 	let nBranches = 5;
-	let branchLength = 10;
+	let branchLength = 35;
 	let margin = 10;
 </script>
 
