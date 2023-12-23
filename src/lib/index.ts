@@ -55,3 +55,20 @@ export interface Present3D {
 	y: number; // 1-20
 	z: number;
 }
+
+export interface ElfPost {
+	id: string;
+	author: string;
+	timestamp: string;
+	content: string;
+	likes: number;
+	comments: PostComment[];
+}
+
+export interface PostComment {
+	id: string;
+	author: string;
+	timestamp: string;
+	content: string;
+	likes: number;
+}

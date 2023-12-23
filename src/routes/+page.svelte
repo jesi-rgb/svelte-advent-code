@@ -45,6 +45,7 @@
 		<DayLink link="/day20" title="Cracker Jokes" />
 		<DayLink link="/day21" title="Frightful Weather App" />
 		<DayLink link="/day22" title="Snowflake Generator" />
+		<DayLink link="/day23" title="ElfNet Social" />
 	</ol>
 
 	<div class="divider mt-7">
