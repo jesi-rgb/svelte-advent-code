@@ -1,8 +1,11 @@
 <script lang="ts">
 	import type { ElfPost } from '$lib/index';
+	import { hashCode } from '$lib/utils';
 	import Comment from './Comment.svelte';
 
 	export let post: ElfPost;
+
+	let gender = hashCode(post.author) % 2 == 0 ? 'boy' : 'girl';
 </script>
 
 <div
@@ -14,7 +17,7 @@
 				<img
 					class="scale-125 pt-1"
 					width="40"
-					src="https://avatar.iran.liara.run/public/girl?username={post.author}"
+					src="https://avatar.iran.liara.run/public/{gender}?username={post.author}"
 					alt=""
 				/>
 			</div>
