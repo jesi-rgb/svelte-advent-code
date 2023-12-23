@@ -9,9 +9,9 @@
 </script>
 
 <div
-	class="my-5 border-2 border-base-content/10 rounded-xl p-4 bg-gradient-to-b from-base-100 to-base-300/30"
+	class="my-5 shadow-xl shadow-base-300 border-2 border-base-content/10 rounded-xl p-4 bg-gradient-to-b from-base-100 to-base-300/30"
 >
-	<div class="flex justify-between items-center">
+	<div class="flex flex-col md:flex-row justify-between md:items-center">
 		<div class="flex items-center space-x-2">
 			<div class="mask mask-squircle">
 				<img
@@ -27,7 +27,9 @@
 			</span>
 		</div>
 
-		<span class=" opacity-60">{new Date(post.timestamp).toLocaleString()}</span>
+		<span class="self-end md:self-auto opacity-60 text-sm md:text-base"
+			>{new Date(post.timestamp).toLocaleString()}</span
+		>
 	</div>
 
 	<p class="pt-3">
