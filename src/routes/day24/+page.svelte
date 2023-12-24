@@ -89,12 +89,27 @@
 	<div class="text-sm breadcrumbs border border-base-content/40 rounded-xl p-2">
 		<ul>
 			{#each history as h}
-				<li>{h.city}</li>
+				<li
+					on:click={() => {
+						map.flyTo({
+							center: [h.location.lng, h.location.lat],
+							zoom: 6,
+							duration: 900
+						});
+					}}
+				>
+					<span
+						class="hover:bg-base-content/80 transition-all cursor-pointer hover:text-base-100 p-1 rounded-xl"
+					>
+						{h.city}
+					</span>
+				</li>
 			{/each}
 		</ul>
 	</div>
 
-	<div class="mt-3 w-screen -translate-x-1/2 left-1/2 right-0 absolute h-[600px] md:h-[800px]">
+	<!-- map -->
+	<div class="mt-3 w-screen -translate-x-1/2 left-1/2 right-0 absolute h-[600px] md:h-[700px]">
 		<Map
 			accessToken={PUBLIC_MAPBOX_PK}
 			on:zoom={(e) => {
@@ -105,7 +120,7 @@
 			on:ready={onReady}
 		>
 			{#each history.slice(1) as d, i}
-				<Marker lat={d.location.lat} lng={d.location.lng} label={d.city}>
+				<Marker lat={d.location.lat} lng={d.location.lng}>
 					{#if zoom >= 6}
 						<div class="bg-base-200 bg-opacity-50 backdrop-blur p-4 rounded-xl">
 							<div class="font-sans font-bold text-lg">{i + 1}. {d.city}</div>
