@@ -72,3 +72,34 @@ export interface PostComment {
 	content: string;
 	likes: number;
 }
+
+export interface Destination {
+	id: string;
+	arrival: number; // arrival unix timestamp (UTC)
+	departure: number | null; // only null for the final landing
+	population: number;
+	presentsDelivered: number;
+	city: string;
+	region: string;
+	location: {
+		lat: number;
+		lng: number;
+	};
+}
+
+export interface DestinationResponse {
+	/**
+	 * Current Location
+	 */
+	current: Destination;
+
+	/**
+	 * Next Location
+	 */
+	next: Destination;
+
+	/**
+	 * History of locations (excluding current)
+	 */
+	history: Destination[];
+}
