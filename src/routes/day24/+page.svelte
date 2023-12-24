@@ -36,9 +36,7 @@
 <p>Where is Santa now, where is he heading and where has he been? All answered here.</p>
 
 <main class="my-10">
-	<div
-		class="w-screen -translate-x-1/2 left-1/2 right-0 absolute h-[600px] md:relative md:w-full md:translate-x-0"
-	>
+	<div class="w-screen -translate-x-1/2 left-1/2 right-0 absolute h-[600px] md:h-[800px]">
 		<Map
 			accessToken={PUBLIC_MAPBOX_PK}
 			style="mapbox://styles/jesi-rgb/clqja1dr600j101qycrr49jms"
