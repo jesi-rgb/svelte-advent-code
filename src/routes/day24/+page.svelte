@@ -67,7 +67,7 @@
 <p>Where is Santa now, where is he heading and where has he been? All answered here.</p>
 
 <main class="my-10">
-	<div class="mb-3 md:text-right tabular-nums md:w-3/4 md:ml-auto">
+	<div class="mb-3 md:text-right tabular-nums md:w-3/4 md:ml-auto flex-col flex space-y-3">
 		<div class="flex justify-between items-end">
 			<div class="">Presents delivered:</div>
 			<span class="font-bold">{totalPresents.toLocaleString()}</span>
