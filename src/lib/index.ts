@@ -79,6 +79,7 @@ export interface Destination {
 	departure: number | null; // only null for the final landing
 	population: number;
 	presentsDelivered: number;
+	numberPresents: number;
 	city: string;
 	region: string;
 	location: {

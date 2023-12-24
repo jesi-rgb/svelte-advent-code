@@ -5,5 +5,12 @@ export async function load({ fetch }): Promise<DestinationResponse> {
 
 	const destinations: DestinationResponse = await promise.json();
 
+	for (let index = 1; index < destinations.history.length; index++) {
+		const curr = destinations.history[index].presentsDelivered;
+		const prev = destinations.history[index - 1].presentsDelivered;
+
+		destinations.history[index]['numberPresents'] = curr - prev;
+	}
+
 	return destinations;
 }
