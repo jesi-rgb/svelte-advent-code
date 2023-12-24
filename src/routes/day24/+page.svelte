@@ -9,8 +9,6 @@
 
 	export let data: DestinationResponse;
 
-	console.log(data);
-
 	let history = data.history;
 
 	$: last = history[history.length - 1];
@@ -19,7 +17,7 @@
 	// map stuff
 	let map: any;
 
-	let zoom: number, center: number[];
+	let zoom: number;
 
 	function onReady() {
 		map.flyTo({
@@ -124,7 +122,7 @@
 								cx="50%"
 								cy="50%"
 								r={1 + (d.numberPresents / totalPresents) * 90}
-								class="fill-primary/40 stroke-primary"
+								class="fill-primary/80 stroke-primary"
 							/>
 							<text
 								x="50%"
