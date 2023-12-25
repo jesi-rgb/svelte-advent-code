@@ -17,8 +17,7 @@
 	// map stuff
 	let map: any;
 
-	let zoom: number;
-	$: console.log(zoom);
+	let zoom: number, center: number[];
 
 	function onReady() {
 		map.flyTo({
@@ -118,10 +117,11 @@
 			}}
 			style="mapbox://styles/jesi-rgb/clqja1dr600j101qycrr49jms"
 			bind:map
+			bind:center
 			on:ready={onReady}
 		>
 			{#each history.slice(1) as d, i}
-				<Marker lat={d.location.lat} lng={d.location.lng}>
+				<Marker popup={false} lat={d.location.lat} lng={d.location.lng}>
 					{#if zoom >= 6.5}
 						<div class="bg-base-200 bg-opacity-50 backdrop-blur p-4 rounded-xl">
 							<div class="font-sans font-bold text-lg">{i + 1}. {d.city}</div>
@@ -131,29 +131,29 @@
 							</div>
 							<div class="font-sans">🕛 {new Date(d.arrival).toLocaleString()}</div>
 						</div>
-					{:else if zoom >= 5}
+					{:else if zoom >= 3}
 						<!-- <div in:scale class="w-4 h-4 bg-primary border border-primary rounded-xl"></div> -->
 						<svg width="100" height="100">
 							<circle
 								cx="50%"
 								cy="50%"
-								r={1 + (d.numberPresents / totalPresents) * 90}
+								r={1 + (d.numberPresents / totalPresents) * 200}
 								class="fill-primary/80 stroke-primary"
 							/>
 							<text
 								x="50%"
 								y="50%"
 								text-anchor="middle"
-								dy="-{4 + (d.numberPresents / totalPresents) * 90}"
+								dy="-{4 + (d.numberPresents / totalPresents) * 200}"
 								class="font-sans font-bold fill-base-content">{i + 1}</text
 							>
 						</svg>
-					{:else if zoom < 5}
+					{:else if zoom < 3}
 						<svg width="100" height="100">
 							<circle
 								cx="50%"
 								cy="50%"
-								r={1 + (d.numberPresents / totalPresents) * 90}
+								r={1 + (d.numberPresents / totalPresents) * 200}
 								class="fill-primary/80 stroke-primary"
 							/>
 						</svg>
