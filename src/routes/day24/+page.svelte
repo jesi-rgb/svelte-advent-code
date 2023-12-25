@@ -18,6 +18,7 @@
 	let map: any;
 
 	let zoom: number;
+	$: console.log(zoom);
 
 	function onReady() {
 		map.flyTo({
@@ -57,7 +58,7 @@
 
 	$: totalPresents = history[history.length - 1].presentsDelivered;
 	$: totalCities = history.length - 1;
-	$: avgPresentsPerHour = totalPresents / (new Date().getHours() - 11);
+	$: avgPresentsPerHour = totalPresents / new Date(Date.UTC(2023, 11, 24, 10, 0, 0)).getHours();
 	$: avgPresentPerMin = avgPresentsPerHour / 60;
 </script>
 
@@ -121,7 +122,7 @@
 		>
 			{#each history.slice(1) as d, i}
 				<Marker lat={d.location.lat} lng={d.location.lng}>
-					{#if zoom >= 6}
+					{#if zoom >= 6.5}
 						<div class="bg-base-200 bg-opacity-50 backdrop-blur p-4 rounded-xl">
 							<div class="font-sans font-bold text-lg">{i + 1}. {d.city}</div>
 							<div class="font-sans text-sm mb-2">{d.region}</div>
@@ -130,7 +131,7 @@
 							</div>
 							<div class="font-sans">🕛 {new Date(d.arrival).toLocaleString()}</div>
 						</div>
-					{:else}
+					{:else if zoom >= 5}
 						<!-- <div in:scale class="w-4 h-4 bg-primary border border-primary rounded-xl"></div> -->
 						<svg width="100" height="100">
 							<circle
@@ -146,6 +147,15 @@
 								dy="-{4 + (d.numberPresents / totalPresents) * 90}"
 								class="font-sans font-bold fill-base-content">{i + 1}</text
 							>
+						</svg>
+					{:else if zoom < 5}
+						<svg width="100" height="100">
+							<circle
+								cx="50%"
+								cy="50%"
+								r={1 + (d.numberPresents / totalPresents) * 90}
+								class="fill-primary/80 stroke-primary"
+							/>
 						</svg>
 					{/if}
 				</Marker>
